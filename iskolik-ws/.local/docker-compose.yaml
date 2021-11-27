@@ -1,0 +1,15 @@
+version: "3"
+services:
+    postgresdb:
+        shm_size: '256MB'
+        image: postgres:12-alpine
+        restart: always
+        environment:
+            POSTGRES_DB: iskolik
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        container_name: local-postgresdb
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./dbscripts:/docker-entrypoint-initdb.d/
