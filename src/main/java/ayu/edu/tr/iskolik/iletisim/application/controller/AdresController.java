@@ -50,23 +50,23 @@ public class AdresController extends BaseController {
 		return createResponseForSuccess(HttpStatus.OK, musteriDTOList);
 	}
 
-	@PostMapping(value = "/")
+	@PostMapping(value = "")
 	public ResponseEntity<GenericServerResponse> saveAdres(@Validated(PostValidation.class) @RequestBody AdresRequest adresRequest) {
 		AdresDTO requestAdresDTO = adresRequestMapper.toAdresDTO(adresRequest);
 		AdresDTO responseAdresDTO = adresService.saveAdres(requestAdresDTO);
-		return createResponseForSuccess(HttpStatus.CREATED, responseAdresDTO, "Parabirimi başarıyla kaydedildi");
+		return createResponseForSuccess(HttpStatus.CREATED, responseAdresDTO, "Adres başarıyla kaydedildi");
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<GenericServerResponse> updateAdres(@PathVariable Long id, @Validated(PostValidation.class) @RequestBody AdresRequest adresRequest) {
 		AdresDTO requestAdresDTO = adresRequestMapper.toAdresDTO(adresRequest);
 		AdresDTO responseAdresDTO = adresService.updateAdres(id, requestAdresDTO);
-		return createResponseForSuccess(HttpStatus.CREATED, responseAdresDTO, "Parabirimi başarıyla güncellendi");
+		return createResponseForSuccess(HttpStatus.CREATED, responseAdresDTO, "Adres başarıyla güncellendi");
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<GenericServerResponse> deleteAdres(@PathVariable Long id) {
 		AdresDTO adresDTO = adresService.deleteAdresById(id);
-		return createResponseForSuccess(HttpStatus.OK, adresDTO, "Parabirimi başarıyla silindi");
+		return createResponseForSuccess(HttpStatus.OK, adresDTO, "Adres başarıyla silindi");
 	}
 }

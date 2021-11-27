@@ -134,7 +134,7 @@ public class RestControllerExceptionHandler {
 			GenericServerResponse response = getResponseForError(String.valueOf(e.getErrorCode().getId()), message);
 
 			String timestampedMessage = response.getTimestamp().format(DateTimeFormatter.ISO_DATE_TIME) + " --> " + message;
-			logger.error("Vezne Ortak", timestampedMessage, e);
+			logger.error("İşkolik", timestampedMessage, e);
 
 			return ResponseEntity.status(httpStatus).body(response);
 		} catch (Exception exception) {
