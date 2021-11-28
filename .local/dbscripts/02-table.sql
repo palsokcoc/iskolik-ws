@@ -61,7 +61,7 @@ create table iskolik.kategori (
     ad              text unique not null,
     aciklama        text,
     ata_kategori_id int,
-    durum           text        not null, --Aktif,Pasif
+--    durum           text        not null, --Aktif,Pasif
     primary key (kategori_id),
     constraint fk_kategori__ata_kategori
         foreign key (kategori_id)
