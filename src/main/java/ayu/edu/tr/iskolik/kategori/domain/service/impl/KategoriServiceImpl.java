@@ -47,31 +47,54 @@ public class KategoriServiceImpl implements KategoriService {
 	}
 
 	@Override
-	public KategoriDTO saveKategori(KategoriDTO KategoriDTO) {
-		if (KategoriDTO.getKategoriId() != null) {
+	public KategoriDTO saveKategori(KategoriDTO kategoriDTO) {
+		if (kategoriDTO.getKategoriId() != null) {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_FIELD_NOT_NULL, "id");
 		}
 
-		Kategori Kategori = kategoriDTOMapper.toKategori(KategoriDTO);
-		ayu.edu.tr.iskolik.kategori.domain.model.entity.Kategori savedKategori = kategoriRepository.save(Kategori);
+		Kategori kategori = kategoriDTOMapper.toKategori(kategoriDTO);
+
+		if(kategori.getAtaKategori() != null && kategori.getAtaKategori().getKategoriId() != null) {
+			KategoriDTO ataKategoriDTO = this.findKategoriById(kategori.getAtaKategori().getKategoriId());
+			if (kategoriDTO.getKategoriId() == ataKategoriDTO.getKategoriId()) {
+				throw new IskolikOrtakException(ErrorCode.SYSTEM_ERROR, "...");
+			}
+
+			if (ataKategoriDTO!=null) {
+				kategori.setAtaKategori(kategoriDTOMapper.toKategori(ataKategoriDTO));
+			}
+		}
+		ayu.edu.tr.iskolik.kategori.domain.model.entity.Kategori savedKategori = kategoriRepository.save(kategori);
 		return kategoriDTOMapper.toKategoriDTO(savedKategori);
 	}
 
 	@Override
-	public KategoriDTO updateKategori(Long id, KategoriDTO KategoriDTO) {
-		if (KategoriDTO.getKategoriId() != null) {
-			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_FIELD_NOT_NULL, "id");
+	public KategoriDTO updateKategori(Long id, KategoriDTO kategoriDTO) {
+		if (kategoriDTO.getKategoriId() == null) {
+			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_FIELD_NULL, "id");
 		}
 
 		if (kategoriRepository.findById(id).isEmpty()) {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(id));
 		}
 
-		KategoriDTO.setKategoriId(id);
-		Kategori Kategori = kategoriDTOMapper.toKategori(KategoriDTO);
-		kategoriRepository.save(Kategori);
+		kategoriDTO.setKategoriId(id);
+		Kategori kategori = kategoriDTOMapper.toKategori(kategoriDTO);
 
-		return KategoriDTO;
+		if(kategori.getAtaKategori() != null && kategori.getAtaKategori().getKategoriId() != null) {
+			KategoriDTO ataKategoriDTO = this.findKategoriById(kategori.getAtaKategori().getKategoriId());
+			if (kategoriDTO.getKategoriId() == ataKategoriDTO.getKategoriId()) {
+				throw new IskolikOrtakException(ErrorCode.SYSTEM_ERROR, "...");
+			}
+
+			if (kategoriDTO!=null) {
+				kategori.setAtaKategori(kategoriDTOMapper.toKategori(ataKategoriDTO));
+			}
+		}
+
+		kategoriRepository.save(kategori);
+
+		return kategoriDTO;
 	}
 
 	@Override

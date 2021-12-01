@@ -10,6 +10,7 @@ import ayu.edu.tr.iskolik.infrastructure.localization.MessageLocalizationService
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -122,8 +123,8 @@ public class RestControllerExceptionHandler {
 	}
 
 	@ExceptionHandler({Exception.class})
-	public ResponseEntity<GenericServerResponse> handleException(Exception e, HttpRequest request) {
-		logger.error(request.getURI().toString(), "", e);
+	public ResponseEntity<GenericServerResponse> handleException(Exception e, HttpServletRequest request) {
+		logger.error(request.getRequestURI().toString(), "", e);
 		IskolikOrtakException iskolikOrtakException = new IskolikOrtakException(ErrorCode.SYSTEM_ERROR, e.getMessage());
 		return handleIskolikOrtakException(iskolikOrtakException, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

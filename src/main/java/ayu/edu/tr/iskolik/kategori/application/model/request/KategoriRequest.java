@@ -8,16 +8,15 @@ import javax.validation.groups.Default;
 
 public class KategoriRequest {
 
-	@NotNull(message = "validation.request.field.null", groups = {PutValidation.class, Default.class})
+//	@NotNull(message = "validation.request.field.null", groups = {PutValidation.class, Default.class})
 	private Long kategoriId;
 
-	@NotEmpty(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
+//	@NotEmpty(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private String ad;
 
-	@NotEmpty(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
+//	@NotEmpty(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private String aciklama;
 
-	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private KategoriRequest ataKategori;
 
 	/* getters-setters */

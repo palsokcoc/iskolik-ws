@@ -4,11 +4,21 @@ import ayu.edu.tr.iskolik.infrastructure.interceptor.LogExecutionInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("*")
+				.allowedHeaders("*")
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "PATCH")
+				.maxAge(-1)   // add maxAge
+				.allowCredentials(false);
+	}
 
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {

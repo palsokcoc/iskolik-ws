@@ -2,6 +2,7 @@ package ayu.edu.tr.iskolik.kategori.application.controller;
 
 import ayu.edu.tr.iskolik.common.application.controller.BaseController;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValidation;
+import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
 import ayu.edu.tr.iskolik.common.domain.repository.BaseSpecification;
 import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
@@ -15,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +48,8 @@ public class KategoriController extends BaseController {
 	@GetMapping(value = "")
 	public ResponseEntity<GenericServerResponse> getKategoriList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
 		BaseSpecification specification = new BaseSpecification(filters);
-		List<KategoriDTO> musteriDTOList = kategoriService.findAll(specification,pageable);
-		return createResponseForSuccess(HttpStatus.OK, musteriDTOList);
+		List<KategoriDTO> kategoriDTOList = kategoriService.findAll(specification,pageable);
+		return createResponseForSuccess(HttpStatus.OK, kategoriDTOList);
 	}
 
 	@PostMapping(value = "")
@@ -58,7 +60,7 @@ public class KategoriController extends BaseController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<GenericServerResponse> updateKategori(@PathVariable Long id, @Validated(PostValidation.class) @RequestBody KategoriRequest kategoriRequest) {
+	public ResponseEntity<GenericServerResponse> updateKategori(@PathVariable Long id, @Validated(PutValidation.class) @RequestBody KategoriRequest kategoriRequest) {
 		KategoriDTO requestKategoriDTO = kategoriRequestMapper.toKategoriDTO(kategoriRequest);
 		KategoriDTO responseKategoriDTO = kategoriService.updateKategori(id, requestKategoriDTO);
 		return createResponseForSuccess(HttpStatus.CREATED, responseKategoriDTO, "Kategori başarıyla güncellendi");

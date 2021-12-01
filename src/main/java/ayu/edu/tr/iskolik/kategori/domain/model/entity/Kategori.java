@@ -27,7 +27,7 @@ public class Kategori {
 	@Column(name = "aciklama", nullable = false)
 	private String aciklama;
 
-	@ManyToOne(optional = true, cascade = CascadeType.MERGE)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "ata_kategori_id")
 	private Kategori ataKategori;
 

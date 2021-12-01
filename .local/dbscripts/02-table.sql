@@ -69,7 +69,7 @@ create table iskolik.kategori (
 );
 
 create table iskolik.profil (
-    profil_id int,
+    profil_id serial,
     ozgecmis  text,
     primary key (profil_id),
     constraint fk_profil__kullanici
