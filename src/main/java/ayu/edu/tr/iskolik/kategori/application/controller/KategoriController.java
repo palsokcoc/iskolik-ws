@@ -52,23 +52,23 @@ public class KategoriController extends BaseController {
 		return createResponseForSuccess(HttpStatus.OK, kategoriDTOList);
 	}
 
-	@PostMapping(value = "")
+	@PostMapping(value = "/")
 	public ResponseEntity<GenericServerResponse> saveKategori(@Validated(PostValidation.class) @RequestBody KategoriRequest kategoriRequest) {
 		KategoriDTO requestKategoriDTO = kategoriRequestMapper.toKategoriDTO(kategoriRequest);
 		KategoriDTO responseKategoriDTO = kategoriService.saveKategori(requestKategoriDTO);
-		return createResponseForSuccess(HttpStatus.CREATED, responseKategoriDTO, "Kategori başarıyla kaydedildi");
+		return createResponseForSuccess(HttpStatus.CREATED, responseKategoriDTO, responseKategoriDTO.getAd() + " adlı kategori başarıyla kaydedildi");
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<GenericServerResponse> updateKategori(@PathVariable Long id, @Validated(PutValidation.class) @RequestBody KategoriRequest kategoriRequest) {
 		KategoriDTO requestKategoriDTO = kategoriRequestMapper.toKategoriDTO(kategoriRequest);
 		KategoriDTO responseKategoriDTO = kategoriService.updateKategori(id, requestKategoriDTO);
-		return createResponseForSuccess(HttpStatus.CREATED, responseKategoriDTO, "Kategori başarıyla güncellendi");
+		return createResponseForSuccess(HttpStatus.CREATED, responseKategoriDTO, responseKategoriDTO.getAd() + " adlı kategori başarıyla güncellendi");
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<GenericServerResponse> deleteKategori(@PathVariable Long id) {
 		KategoriDTO kategoriDTO = kategoriService.deleteKategoriById(id);
-		return createResponseForSuccess(HttpStatus.OK, kategoriDTO, "Kategori başarıyla silindi");
+		return createResponseForSuccess(HttpStatus.OK, kategoriDTO, kategoriDTO.getAd() + " adlı kategori başarıyla silindi");
 	}
 }

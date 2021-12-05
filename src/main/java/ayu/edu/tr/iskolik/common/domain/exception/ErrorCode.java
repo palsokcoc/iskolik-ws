@@ -3,6 +3,7 @@ package ayu.edu.tr.iskolik.common.domain.exception;
 public enum ErrorCode {
 
 	SYSTEM_ERROR(10000, "system.error"),
+	CUSTOM_ERROR(10500, "custom.error"),
 
 	VALIDATION_REQUEST_ARGUMENT_NOT_VALID(11100, "validation.request.argument.not.valid"),
 	VALIDATION_REQUEST_ARGUMENT_TYPE_MISMATCH(11101, "validation.request.argument.type.mismatch"),

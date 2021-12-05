@@ -54,15 +54,21 @@ public class KategoriServiceImpl implements KategoriService {
 
 		Kategori kategori = kategoriDTOMapper.toKategori(kategoriDTO);
 
-		if(kategori.getAtaKategori() != null && kategori.getAtaKategori().getKategoriId() != null) {
+		if(kategori.getAtaKategori() != null && kategori.getAtaKategori().getKategoriId() != null && kategori.getAtaKategori().getKategoriId() != 0) {
 			KategoriDTO ataKategoriDTO = this.findKategoriById(kategori.getAtaKategori().getKategoriId());
 			if (kategoriDTO.getKategoriId() == ataKategoriDTO.getKategoriId()) {
 				throw new IskolikOrtakException(ErrorCode.SYSTEM_ERROR, "...");
 			}
 
+			if(cyclicDependencyVarMi(kategoriDTO, ataKategoriDTO)) {
+				throw new IskolikOrtakException(ErrorCode.CUSTOM_ERROR, "Kategoriler arasında sonsuz döngü oluşamaz");
+			}
+
 			if (ataKategoriDTO!=null) {
 				kategori.setAtaKategori(kategoriDTOMapper.toKategori(ataKategoriDTO));
 			}
+		} else {
+			kategori.setAtaKategori(null);
 		}
 		ayu.edu.tr.iskolik.kategori.domain.model.entity.Kategori savedKategori = kategoriRepository.save(kategori);
 		return kategoriDTOMapper.toKategoriDTO(savedKategori);
@@ -81,15 +87,21 @@ public class KategoriServiceImpl implements KategoriService {
 		kategoriDTO.setKategoriId(id);
 		Kategori kategori = kategoriDTOMapper.toKategori(kategoriDTO);
 
-		if(kategori.getAtaKategori() != null && kategori.getAtaKategori().getKategoriId() != null) {
+		if(kategori.getAtaKategori() != null && kategori.getAtaKategori().getKategoriId() != null && kategori.getAtaKategori().getKategoriId() != 0) {
 			KategoriDTO ataKategoriDTO = this.findKategoriById(kategori.getAtaKategori().getKategoriId());
 			if (kategoriDTO.getKategoriId() == ataKategoriDTO.getKategoriId()) {
 				throw new IskolikOrtakException(ErrorCode.SYSTEM_ERROR, "...");
 			}
 
-			if (kategoriDTO!=null) {
+			if(cyclicDependencyVarMi(kategoriDTO, ataKategoriDTO)) {
+				throw new IskolikOrtakException(ErrorCode.CUSTOM_ERROR, "Kategoriler arasında sonsuz döngü oluşamaz");
+			}
+
+			if (ataKategoriDTO != null) {
 				kategori.setAtaKategori(kategoriDTOMapper.toKategori(ataKategoriDTO));
 			}
+		} else {
+			kategori.setAtaKategori(null);
 		}
 
 		kategoriRepository.save(kategori);
@@ -107,5 +119,20 @@ public class KategoriServiceImpl implements KategoriService {
 		KategoriDTO KategoriDTO = kategoriDTOMapper.toKategoriDTO(Kategori.get());
 		kategoriRepository.deleteById(id);
 		return KategoriDTO;
+	}
+
+	private boolean cyclicDependencyVarMi(KategoriDTO kategoriDTO, KategoriDTO ataKategoriDTO) {
+		if(kategoriDTO.getKategoriId() == ataKategoriDTO.getKategoriId()) {
+			return true;
+		} else {
+			while (ataKategoriDTO.getAtaKategori() != null) {
+				ataKategoriDTO = ataKategoriDTO.getAtaKategori();
+				if(kategoriDTO.getKategoriId() == ataKategoriDTO.getKategoriId()) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }
