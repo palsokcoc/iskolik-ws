@@ -64,7 +64,7 @@ create table iskolik.kategori (
 --    durum           text        not null, --Aktif,Pasif
     primary key (kategori_id),
     constraint fk_kategori__ata_kategori
-        foreign key (kategori_id)
+        foreign key (ata_kategori_id)
             references iskolik.kategori
 );
 
@@ -118,13 +118,14 @@ create table iskolik.ilan (
     giris_tarihi        date    not null,
     yayin_tarihi        date,
     iptal_tarihi        date,
-    son_basvuru_tarihi  date    not null,
+    son_basvuru_tarihi  date,
     basvuru_limiti      int,
     aciklama            text    not null,
     zorunlu_ozellikler  text,
     tercihen_ozellikler text,
-    maas_araligi        text,
-    durum               char(10), --Beklemede,Aktif,İptal,Tamamlandi
+    min_maas            int,
+    max_maas            int,
+    durum               varchar(10), --Beklemede,Aktif,İptal,Tamamlandi
     primary key (ilan_id),
     constraint fk_ilan__kullanici
         foreign key (kullanici_id)
@@ -136,7 +137,7 @@ create table iskolik.basvuru (
     kullanici_id   int,
     ilan_id        int,
     basvuru_tarihi date not null,
-    durum          char(10), --Aktif,İptal, Kapalı
+    durum          varchar(10), --Aktif,İptal, Kapalı
     primary key (basvuru_id),
     constraint fk_basvuru__bireysel_kullanici
         foreign key (kullanici_id)
