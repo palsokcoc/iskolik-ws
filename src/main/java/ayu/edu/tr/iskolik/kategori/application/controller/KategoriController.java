@@ -6,6 +6,7 @@ import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidat
 import ayu.edu.tr.iskolik.common.domain.repository.BaseSpecification;
 import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
+import ayu.edu.tr.iskolik.infrastructure.configuration.IskolikConfigutarion;
 import ayu.edu.tr.iskolik.kategori.domain.model.dto.KategoriDTO;
 import ayu.edu.tr.iskolik.kategori.domain.service.KategoriService;
 import ayu.edu.tr.iskolik.kategori.application.model.mapper.KategoriRequestMapper;
@@ -46,7 +47,7 @@ public class KategoriController extends BaseController {
 	}
 
 	@GetMapping(value = "")
-	public ResponseEntity<GenericServerResponse> getKategoriList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+	public ResponseEntity<GenericServerResponse> getKategoriList(@ModelAttribute() Filters filters, @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
 		BaseSpecification specification = new BaseSpecification(filters);
 		List<KategoriDTO> kategoriDTOList = kategoriService.findAll(specification,pageable);
 		return createResponseForSuccess(HttpStatus.OK, kategoriDTOList);

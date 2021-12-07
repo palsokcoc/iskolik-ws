@@ -10,7 +10,9 @@ import ayu.edu.tr.iskolik.ilan.application.model.mapper.IlanRequestMapper;
 import ayu.edu.tr.iskolik.ilan.application.model.request.IlanRequest;
 import ayu.edu.tr.iskolik.ilan.domain.model.dto.IlanDTO;
 import ayu.edu.tr.iskolik.ilan.domain.service.IlanService;
+import ayu.edu.tr.iskolik.infrastructure.configuration.IskolikConfigutarion;
 import java.util.List;
+import java.util.Map;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -45,13 +48,13 @@ public class IlanController extends BaseController {
 	}
 
 	@GetMapping(value = "")
-	public ResponseEntity<GenericServerResponse> getIlanList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+	public ResponseEntity<GenericServerResponse> getIlanList(@ModelAttribute() Filters filters, @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
 		BaseSpecification specification = new BaseSpecification(filters);
 		List<IlanDTO> ilanDTOList = ilanService.findAll(specification,pageable);
 		return createResponseForSuccess(HttpStatus.OK, ilanDTOList);
 	}
 
-	@PostMapping(value = "")
+	@PostMapping(value = "/")
 	public ResponseEntity<GenericServerResponse> saveIlan(@Validated(PostValidation.class) @RequestBody IlanRequest ilanRequest) {
 		IlanDTO requestIlanDTO = ilanRequestMapper.toIlanDTO(ilanRequest);
 		IlanDTO responseIlanDTO = ilanService.saveIlan(requestIlanDTO);
@@ -68,6 +71,12 @@ public class IlanController extends BaseController {
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<GenericServerResponse> deleteIlan(@PathVariable Long id) {
 		IlanDTO ilanDTO = ilanService.deleteIlanById(id);
-		return createResponseForSuccess(HttpStatus.OK, ilanDTO, ilanDTO.getIlanId() + " nlan başarıyla silindi");
+		return createResponseForSuccess(HttpStatus.OK, ilanDTO, ilanDTO.getIlanId() + " nolu ilan başarıyla silindi");
+	}
+
+	@PatchMapping(value = "/{id}")
+	public ResponseEntity<GenericServerResponse> patchIlan(@PathVariable Long id, @RequestBody Map<String,String> values) {
+		IlanDTO ilanDTO = ilanService.patchIlanById(id, values);
+		return createResponseForSuccess(HttpStatus.OK, ilanDTO, ilanDTO.getIlanId() + " nolu ilanın durumu " + ilanDTO.getDurum().getAciklama() + " olarak güncellendi");
 	}
 }

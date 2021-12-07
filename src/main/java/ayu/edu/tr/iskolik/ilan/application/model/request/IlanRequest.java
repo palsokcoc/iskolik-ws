@@ -1,28 +1,38 @@
 package ayu.edu.tr.iskolik.ilan.application.model.request;
 
+import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValidation;
+import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
 import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan.Durum;
 import ayu.edu.tr.iskolik.kullanici.application.model.request.KurumsalKullaniciRequest;
 import java.time.LocalDate;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.groups.Default;
 
 public class IlanRequest {
 
-//	@NotNull(message = "validation.request.field.null", groups = {PutValidation.class, Default.class})
+	@NotNull(message = "validation.request.field.null", groups = {PutValidation.class, Default.class})
 	private Long ilanId;
 
 	private KurumsalKullaniciRequest kullanici;
 
+	@NotEmpty(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private String unvan;
 
+	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private Boolean isPartTime;
 
 	private String yer;
 
 	private LocalDate girisTarihi;
 
+	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private LocalDate yayinTarihi;
 
 	private LocalDate iptalTarihi;
 
+	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private LocalDate sonBasvuruTarihi;
 
 	private Integer basvuruLimiti;
@@ -33,8 +43,10 @@ public class IlanRequest {
 
 	private String tercihenOzellikler;
 
+	@PositiveOrZero(message = "validation.request.field.negative", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private int minMaas;
 
+	@PositiveOrZero(message = "validation.request.field.negative", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private int maxMaas;
 
 	private Durum durum;
