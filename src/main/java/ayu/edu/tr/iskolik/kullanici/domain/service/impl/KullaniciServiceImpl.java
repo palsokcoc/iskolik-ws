@@ -2,6 +2,7 @@ package ayu.edu.tr.iskolik.kullanici.domain.service.impl;
 
 import ayu.edu.tr.iskolik.common.domain.exception.ErrorCode;
 import ayu.edu.tr.iskolik.common.domain.exception.IskolikOrtakException;
+import ayu.edu.tr.iskolik.kullanici.domain.model.dto.ElemanAramaSonucuDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
@@ -44,6 +45,11 @@ public class KullaniciServiceImpl implements KullaniciService {
 	@Override
 	public List<KullaniciDTO> findAll(Specification specification, Pageable pageable) {
 		return kullaniciDTOMapper.toKullaniciDTOList(kullaniciRepository.findAll(specification, pageable).toList());
+	}
+
+	@Override
+	public List<ElemanAramaSonucuDTO> findBireyselKullaniciOzet(Specification specification, Pageable pageable) {
+		return kullaniciRepository.findBireyselKullaniciOzet(specification, pageable);
 	}
 
 	@Override

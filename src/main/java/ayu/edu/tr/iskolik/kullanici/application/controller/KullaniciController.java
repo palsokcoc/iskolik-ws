@@ -1,4 +1,4 @@
-package ayu.edu.tr.iskolik.iletisim.application.controller;
+package ayu.edu.tr.iskolik.kullanici.application.controller;
 
 import ayu.edu.tr.iskolik.common.application.controller.BaseController;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValidation;
@@ -7,6 +7,7 @@ import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
 import ayu.edu.tr.iskolik.kullanici.application.model.mapper.KullaniciRequestMapper;
 import ayu.edu.tr.iskolik.kullanici.application.model.request.KullaniciRequest;
+import ayu.edu.tr.iskolik.kullanici.domain.model.dto.ElemanAramaSonucuDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.service.KullaniciService;
 import java.util.List;
@@ -46,8 +47,15 @@ public class KullaniciController extends BaseController {
 	@GetMapping(value = "")
 	public ResponseEntity<GenericServerResponse> getKullaniciList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
 		BaseSpecification specification = new BaseSpecification(filters);
-		List<KullaniciDTO> musteriDTOList = kullaniciService.findAll(specification,pageable);
-		return createResponseForSuccess(HttpStatus.OK, musteriDTOList);
+		List<KullaniciDTO> kullaniciDTOList = kullaniciService.findAll(specification, pageable);
+		return createResponseForSuccess(HttpStatus.OK, kullaniciDTOList);
+	}
+
+	@GetMapping(value = "/aramaSonucu")
+	public ResponseEntity<GenericServerResponse> getKullaniciListForElemanArama(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+		BaseSpecification specification = new BaseSpecification(filters);
+		List<ElemanAramaSonucuDTO> aramaSonucuDTOList = kullaniciService.findBireyselKullaniciOzet(specification, pageable);
+		return createResponseForSuccess(HttpStatus.OK, aramaSonucuDTOList);
 	}
 
 	@PostMapping(value = "")

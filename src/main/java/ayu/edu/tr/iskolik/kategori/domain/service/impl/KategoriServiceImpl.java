@@ -76,10 +76,6 @@ public class KategoriServiceImpl implements KategoriService {
 
 	@Override
 	public KategoriDTO updateKategori(Long id, KategoriDTO kategoriDTO) {
-		if (kategoriDTO.getKategoriId() == null) {
-			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_FIELD_NULL, "id");
-		}
-
 		if (kategoriRepository.findById(id).isEmpty()) {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(id));
 		}

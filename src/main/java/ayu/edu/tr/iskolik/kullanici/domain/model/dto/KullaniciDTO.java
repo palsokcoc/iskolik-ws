@@ -1,22 +1,12 @@
 package ayu.edu.tr.iskolik.kullanici.domain.model.dto;
 
 import ayu.edu.tr.iskolik.iletisim.domain.model.dto.IletisimDTO;
-import ayu.edu.tr.iskolik.kullanici.application.model.request.BireyselKullaniciRequest;
-import ayu.edu.tr.iskolik.kullanici.application.model.request.KurumsalKullaniciRequest;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.LocalDate;
 
-@JsonTypeInfo(
-		use = JsonTypeInfo.Id.NAME,
-		include = JsonTypeInfo.As.PROPERTY,
-		property = "type")
-@JsonSubTypes({
-		@Type(value = BireyselKullaniciDTO.class, name = "Bireysel"),
-		@Type(value = KurumsalKullaniciDTO.class, name = "Kurumsal")
-})
 public class KullaniciDTO {
 
 	private String type;

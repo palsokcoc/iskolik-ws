@@ -87,17 +87,16 @@ insert into iskolik.kategori (kategori_id,ad,aciklama,ata_kategori_id) values(14
 insert into iskolik.kategori (kategori_id,ad,aciklama,ata_kategori_id) values(15,'Diğer', 'Diğer', 3);
 select setval('iskolik.kategori_kategori_id_seq', 16, true);
 
-insert into iskolik.profil (profil_id,ozgecmis) values (1,'2000 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (2,'2001 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (3,'2002 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (4,'2003 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (5,'2004 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (6,'2005 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (7,'2006 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (8,'2007 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (9,'2008 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-insert into iskolik.profil (profil_id,ozgecmis) values (10,'2009 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
-select setval('iskolik.profil_profil_id_seq', 11, true);
+insert into iskolik.profil (kullanici_id,ozgecmis) values (1,'2000 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (2,'2001 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (3,'2002 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (4,'2003 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (5,'2004 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (6,'2005 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (7,'2006 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (8,'2007 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (9,'2008 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
+insert into iskolik.profil (kullanici_id,ozgecmis) values (10,'2009 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
 
 insert into iskolik.yetenek (profil_id,kategori_id,aciklama) values (1,6,'10 yıl tecrübeli, çok iyi');
 insert into iskolik.yetenek (profil_id,kategori_id,aciklama) values (1,10,'5 yıl tecrübeli, iyi');

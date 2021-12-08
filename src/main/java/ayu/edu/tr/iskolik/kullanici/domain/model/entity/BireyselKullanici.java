@@ -1,5 +1,6 @@
 package ayu.edu.tr.iskolik.kullanici.domain.model.entity;
 
+import ayu.edu.tr.iskolik.profil.domain.model.entity.Profil;
 import java.time.LocalDate;
 import java.util.Arrays;
 import javax.persistence.AttributeConverter;
@@ -8,6 +9,8 @@ import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +28,10 @@ public class BireyselKullanici extends Kullanici {
 
 	@Column(name = "dogum_tarihi", nullable = false)
 	private LocalDate dogumTarihi;
+
+	@OneToOne
+	@JoinColumn(name = "profil_id")
+	private Profil profil;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -99,5 +106,13 @@ public class BireyselKullanici extends Kullanici {
 
 	public void setDogumTarihi(LocalDate dogumTarihi) {
 		this.dogumTarihi = dogumTarihi;
+	}
+
+	public Profil getProfil() {
+		return profil;
+	}
+
+	public void setProfil(Profil profil) {
+		this.profil = profil;
 	}
 }

@@ -69,11 +69,11 @@ create table iskolik.kategori (
 );
 
 create table iskolik.profil (
-    profil_id serial,
+    kullanici_id int,
     ozgecmis  text,
-    primary key (profil_id),
+    primary key (kullanici_id),
     constraint fk_profil__kullanici
-        foreign key (profil_id)
+        foreign key (kullanici_id)
             references iskolik.bireysel_kullanici
 );
 

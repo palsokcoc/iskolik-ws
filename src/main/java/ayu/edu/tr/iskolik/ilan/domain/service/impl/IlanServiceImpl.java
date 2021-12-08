@@ -87,10 +87,6 @@ public class IlanServiceImpl implements IlanService {
 
 	@Override
 	public IlanDTO updateIlan(Long id, IlanDTO ilanDTO) {
-		if (ilanDTO.getIlanId() == null) {
-			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_FIELD_NULL, "id");
-		}
-
 		if (ilanRepository.findById(id).isEmpty()) {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(id));
 		}
