@@ -30,7 +30,7 @@ public class BireyselKullanici extends Kullanici {
 	private LocalDate dogumTarihi;
 
 	@OneToOne
-	@JoinColumn(name = "profil_id")
+	@JoinColumn(name = "kullanici_id")
 	private Profil profil;
 
 	@Override

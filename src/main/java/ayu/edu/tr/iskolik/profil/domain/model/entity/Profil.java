@@ -1,14 +1,18 @@
 package ayu.edu.tr.iskolik.profil.domain.model.entity;
 
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,12 +20,15 @@ import javax.persistence.Table;
 public class Profil {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "kullanici_id")
 	private Long kullaniciId;
 
 	@Column(name = "ozgecmis", nullable = false)
 	private String ozgecmis;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profil")
+	private List<Sertifika> sertifikalar;
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Profil[");

@@ -77,11 +77,33 @@ create table iskolik.profil (
             references iskolik.bireysel_kullanici
 );
 
+create table iskolik.sertifika (
+    sertifika_id  serial,
+    profil_id     int,
+    sertifika_adi text,
+    primary key (sertifika_id),
+    constraint fk_sertifika__profil
+        foreign key (profil_id)
+            references iskolik.profil
+);
+
+create table iskolik.sinav (
+    sinav_id      serial,
+    profil_id     int,
+    sinav_adi     text,
+    sinav_sonucu  text,
+    primary key (sinav_id),
+    constraint fk_sinav__profil
+        foreign key (profil_id)
+            references iskolik.profil
+);
+
 create table iskolik.yetenek (
-    profil_id   int,
-    kategori_id int,
-    aciklama    text,
-    primary key (profil_id, kategori_id),
+    yetenek_id    serial,
+    profil_id     int,
+    kategori_id   int,
+    aciklama      text,
+    primary key (yetenek_id),
     constraint fk_yetenek__profil
         foreign key (profil_id)
             references iskolik.profil,
@@ -90,24 +112,6 @@ create table iskolik.yetenek (
             references iskolik.kategori
 );
 
-create table iskolik.sinav (
-    profil_id    int,
-    sinav_adi    text,
-    sinav_sonucu text,
-    primary key (profil_id,sinav_adi),
-    constraint fk_sinav__profil
-        foreign key (profil_id)
-            references iskolik.profil
-);
-
-create table iskolik.sertifika (
-    profil_id     int,
-    sertifika_adi text,
-    primary key (profil_id,sertifika_adi),
-    constraint fk_sertifika__profil
-        foreign key (profil_id)
-            references iskolik.profil
-);
 
 create table iskolik.ilan (
     ilan_id             serial,

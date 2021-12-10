@@ -98,15 +98,18 @@ insert into iskolik.profil (kullanici_id,ozgecmis) values (8,'2007 yılında Ahm
 insert into iskolik.profil (kullanici_id,ozgecmis) values (9,'2008 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
 insert into iskolik.profil (kullanici_id,ozgecmis) values (10,'2009 yılında Ahmet Yesevi Üniversitesi Bilgisayar Mühendisliği...');
 
-insert into iskolik.yetenek (profil_id,kategori_id,aciklama) values (1,6,'10 yıl tecrübeli, çok iyi');
-insert into iskolik.yetenek (profil_id,kategori_id,aciklama) values (1,10,'5 yıl tecrübeli, iyi');
-insert into iskolik.yetenek (profil_id,kategori_id,aciklama) values (1,11,'2 yıl tecrübeli, orta');
+insert into iskolik.sertifika (sertifika_id,profil_id,sertifika_adi) values (1,1,'Java SE 11 Developer Certification');
+insert into iskolik.sertifika (sertifika_id,profil_id,sertifika_adi) values (2,1,'Oracle Certified Professional, Java SE 8');
+select setval('iskolik.sertifika_sertifika_id_seq', 3, true);
 
-insert into iskolik.sinav (profil_id,sinav_adi,sinav_sonucu) values (1,'YDS','75');
-insert into iskolik.sinav (profil_id,sinav_adi,sinav_sonucu) values (1,'KPSS','82');
+insert into iskolik.sinav (sinav_id,profil_id,sinav_adi,sinav_sonucu) values (1,1,'YDS','75');
+insert into iskolik.sinav (sinav_id,profil_id,sinav_adi,sinav_sonucu) values (2,1,'KPSS','82');
+select setval('iskolik.sinav_sinav_id_seq', 3, true);
 
-insert into iskolik.sertifika (profil_id,sertifika_adi) values (1,'Java SE 11 Developer Certification');
-insert into iskolik.sertifika (profil_id,sertifika_adi) values (1,'Oracle Certified Professional, Java SE 8');
+insert into iskolik.yetenek (yetenek_id,profil_id,kategori_id,aciklama) values (1,1,6,'10 yıl tecrübeli, çok iyi');
+insert into iskolik.yetenek (yetenek_id,profil_id,kategori_id,aciklama) values (2,1,10,'5 yıl tecrübeli, iyi');
+insert into iskolik.yetenek (yetenek_id,profil_id,kategori_id,aciklama) values (3,1,11,'2 yıl tecrübeli, orta');
+select setval('iskolik.yetenek_yetenek_id_seq', 4, true);
 
 insert into iskolik.ilan (ilan_id,kullanici_id,unvan,is_part_time,yer,giris_tarihi,yayin_tarihi,iptal_tarihi,son_basvuru_tarihi,basvuru_limiti,aciklama,zorunlu_ozellikler,tercihen_ozellikler,min_maas,max_maas,durum)
   values (1, 12, 'Bilişim Güvemliği Uzmanı', false,'Ankara','2021-09-25','2021-11-15',null,'2021-12-15',0,'Ankara yerleşkemizde çalışmak üzere tam zamanlı çalışma arkadaşları arıyoruz.','İngilizce','Almanca',0,0,'Beklemede');

@@ -5,7 +5,13 @@ import ayu.edu.tr.iskolik.common.domain.exception.IskolikOrtakException;
 import ayu.edu.tr.iskolik.profil.domain.model.dto.ProfilDTO;
 import ayu.edu.tr.iskolik.profil.domain.model.entity.Profil;
 import ayu.edu.tr.iskolik.profil.domain.model.mapper.ProfilDTOMapper;
+import ayu.edu.tr.iskolik.profil.domain.model.mapper.SertifikaDTOMapper;
+import ayu.edu.tr.iskolik.profil.domain.model.mapper.SinavDTOMapper;
+import ayu.edu.tr.iskolik.profil.domain.model.mapper.YetenekDTOMapper;
 import ayu.edu.tr.iskolik.profil.domain.repository.ProfilRepository;
+import ayu.edu.tr.iskolik.profil.domain.repository.SertifikaRepository;
+import ayu.edu.tr.iskolik.profil.domain.repository.SinavRepository;
+import ayu.edu.tr.iskolik.profil.domain.repository.YetenekRepository;
 import ayu.edu.tr.iskolik.profil.domain.service.ProfilService;
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +28,24 @@ public class ProfilServiceImpl implements ProfilService {
 	private final ProfilRepository profilRepository;
 	private final ProfilDTOMapper profilDTOMapper;
 
-	public ProfilServiceImpl(ProfilRepository profilRepository, ProfilDTOMapper profilDTOMapper) {
+	private final SertifikaRepository sertifikaRepository;
+	private final SertifikaDTOMapper sertifikaDTOMapper;
+
+	private final SinavRepository sinavRepository;
+	private final SinavDTOMapper sinavDTOMapper;
+
+	private final YetenekRepository yetenekRepository;
+	private final YetenekDTOMapper yetenekDTOMapper;
+
+	public ProfilServiceImpl(ProfilRepository profilRepository, ProfilDTOMapper profilDTOMapper, SertifikaRepository sertifikaRepository, SertifikaDTOMapper sertifikaDTOMapper, SinavRepository sinavRepository, SinavDTOMapper sinavDTOMapper, YetenekRepository yetenekRepository, YetenekDTOMapper yetenekDTOMapper) {
 		this.profilRepository = profilRepository;
 		this.profilDTOMapper = profilDTOMapper;
+		this.sertifikaRepository = sertifikaRepository;
+		this.sertifikaDTOMapper = sertifikaDTOMapper;
+		this.sinavRepository = sinavRepository;
+		this.sinavDTOMapper = sinavDTOMapper;
+		this.yetenekRepository = yetenekRepository;
+		this.yetenekDTOMapper = yetenekDTOMapper;
 	}
 
 	@Override
