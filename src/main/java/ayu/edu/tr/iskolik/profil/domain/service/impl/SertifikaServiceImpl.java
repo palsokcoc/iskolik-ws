@@ -2,6 +2,9 @@ package ayu.edu.tr.iskolik.profil.domain.service.impl;
 
 import ayu.edu.tr.iskolik.common.domain.exception.ErrorCode;
 import ayu.edu.tr.iskolik.common.domain.exception.IskolikOrtakException;
+import ayu.edu.tr.iskolik.common.domain.repository.BaseSpecification;
+import ayu.edu.tr.iskolik.common.domain.repository.filter.Filter;
+import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
@@ -37,6 +40,14 @@ public class SertifikaServiceImpl implements SertifikaService {
 	}
 
 	@Override
+	public List<SertifikaDTO> findAllByKullaniciId(Long kullaniciId) {
+		Filters filters = new Filters();
+		filters.addFilter(new Filter("profil.kullaniciId=" + kullaniciId));
+		BaseSpecification<Sertifika> specification = new BaseSpecification<>(filters);
+		return sertifikaDTOMapper.toSertifikaDTOList(sertifikaRepository.findAll(specification));
+	}
+
+	@Override
 	public SertifikaDTO findSertifikaByProfilAndSertifikaId(Long kullaniciId, Long sertifikaId) {
 		Kullanici kullanici = kullaniciRepository.findById(kullaniciId).orElseThrow(() -> new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(kullaniciId)));
 		try {
@@ -64,6 +75,23 @@ public class SertifikaServiceImpl implements SertifikaService {
 			sertifika.setSertifikaAdi(sertifikaDTO.getSertifikaAdi());
 			sertifikaRepository.save(sertifika);
 
+			return sertifikaDTOMapper.toSertifikaDTO(sertifika);
+		} catch (Exception e) {
+			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND,String.valueOf(sertifikaId));
+		}
+	}
+
+	@Override
+	public SertifikaDTO deleteSertifika(Long kullaniciId, Long sertifikaId) {
+		Kullanici kullanici = kullaniciRepository.findById(kullaniciId).orElseThrow(() -> new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(kullaniciId)));
+		try {
+			BireyselKullanici bireyselKullanici = (BireyselKullanici) kullanici;
+			Sertifika sertifika = sertifikaRepository.findSertifikaByProfilAndSertifikaId(bireyselKullanici.getProfil(), sertifikaId);
+			if(sertifika == null) {
+				throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND,String.valueOf(sertifikaId));
+			}
+
+			sertifikaRepository.delete(sertifika);
 			return sertifikaDTOMapper.toSertifikaDTO(sertifika);
 		} catch (Exception e) {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND,String.valueOf(sertifikaId));

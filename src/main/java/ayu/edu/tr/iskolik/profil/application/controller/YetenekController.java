@@ -5,11 +5,14 @@ import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidat
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
 import ayu.edu.tr.iskolik.profil.application.model.mapper.YetenekRequestMapper;
 import ayu.edu.tr.iskolik.profil.application.model.request.YetenekRequest;
+import ayu.edu.tr.iskolik.profil.domain.model.dto.SertifikaDTO;
 import ayu.edu.tr.iskolik.profil.domain.model.dto.YetenekDTO;
 import ayu.edu.tr.iskolik.profil.domain.service.YetenekService;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,6 +32,12 @@ public class YetenekController extends BaseController {
 		this.yetenekRequestMapper = yetenekRequestMapper;
 	}
 
+	@GetMapping(value = "/")
+	public ResponseEntity<GenericServerResponse> getAllYetenekByKullaniciId(@PathVariable Long kullaniciId) {
+		List<YetenekDTO> yetenekDTOList = yetenekService.findAllByKullaniciId(kullaniciId);
+		return createResponseForSuccess(HttpStatus.OK, yetenekDTOList);
+	}
+
 	@GetMapping(value = "/{yetenekId}")
 	public ResponseEntity<GenericServerResponse> getYetenekById(@PathVariable Long kullaniciId, @PathVariable Long yetenekId) {
 		YetenekDTO yetenekDTO = yetenekService.findYetenekByProfilAndYetenekId(kullaniciId, yetenekId);
@@ -40,5 +49,11 @@ public class YetenekController extends BaseController {
 		YetenekDTO requestYetenekDTO = yetenekRequestMapper.toYetenekDTO(yetenekRequest);
 		YetenekDTO responseYetenekDTO = yetenekService.updateYetenek(kullaniciId,yetenekId, requestYetenekDTO);
 		return createResponseForSuccess(HttpStatus.CREATED, responseYetenekDTO, responseYetenekDTO.getProfil().getKullaniciId() + " nolu yetenek başarıyla güncellendi");
+	}
+
+	@DeleteMapping(value = "/{yetenekId}")
+	public ResponseEntity<GenericServerResponse> deleteYetenek(@PathVariable Long kullaniciId, @PathVariable Long yetenekId) {
+		YetenekDTO responseYetenekDTO = yetenekService.deleteYetenek(kullaniciId, yetenekId);
+		return createResponseForSuccess(HttpStatus.CREATED, responseYetenekDTO, responseYetenekDTO.getProfil().getKullaniciId() + " nolu yetenek başarıyla silindi");
 	}
 }

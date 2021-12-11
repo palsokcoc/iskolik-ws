@@ -1,5 +1,6 @@
 package ayu.edu.tr.iskolik.common.domain.repository.filter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +9,10 @@ import java.util.List;
 public class Filters {
 	private List<Filter> filters;
 
+	public Filters() {
+		this.filters = new ArrayList<>();
+	}
+
 	public Filter findFilterByFieldName(String fieldName) {
 		for (Filter filter : filters) {
 			if (filter.getField().equals(fieldName)) {
@@ -15,6 +20,10 @@ public class Filters {
 			}
 		}
 		return null;
+	}
+
+	public void addFilter(Filter filter) {
+		this.filters.add(filter);
 	}
 
 	public List<Filter> getFilters() {
