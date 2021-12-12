@@ -1,8 +1,11 @@
 package ayu.edu.tr.iskolik.ilan.domain.model.dto;
 
 import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan.Durum;
+import ayu.edu.tr.iskolik.kategori.domain.model.dto.KategoriDTO;
+import ayu.edu.tr.iskolik.kategori.domain.model.entity.Kategori;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KurumsalKullaniciDTO;
 import java.time.LocalDate;
+import java.util.List;
 
 public class IlanDTO {
 
@@ -21,6 +24,7 @@ public class IlanDTO {
 	private String tercihenOzellikler;
 	private int minMaas;
 	private int maxMaas;
+	private List<KategoriDTO> kategoriler;
 	private Durum durum;
 
 	/* getters-setters */
@@ -142,6 +146,14 @@ public class IlanDTO {
 
 	public void setMaxMaas(int maxMaas) {
 		this.maxMaas = maxMaas;
+	}
+
+	public List<KategoriDTO> getKategoriler() {
+		return kategoriler;
+	}
+
+	public void setKategoriler(List<KategoriDTO> kategoriler) {
+		this.kategoriler = kategoriler;
 	}
 
 	public Durum getDurum() {

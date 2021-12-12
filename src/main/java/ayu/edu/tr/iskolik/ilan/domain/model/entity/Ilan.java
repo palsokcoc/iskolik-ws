@@ -1,15 +1,20 @@
 package ayu.edu.tr.iskolik.ilan.domain.model.entity;
 
 
+import ayu.edu.tr.iskolik.kategori.domain.model.entity.Kategori;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.KurumsalKullanici;
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -63,6 +68,15 @@ public class Ilan {
 
 	@Column(name = "max_maas")
 	private Integer maxMaas;
+
+	@OneToMany
+	@JoinTable(
+			schema = "iskolik",
+			name = "ilan_kategori",
+			joinColumns =  @JoinColumn(name = "ilan_id"),
+			inverseJoinColumns = @JoinColumn(name = "kategori_id")
+	)
+	private List<Kategori> kategoriler;
 
 	@Column(name = "durum", nullable = false)
 	private Durum durum;
@@ -230,5 +244,13 @@ public class Ilan {
 
 	public void setDurum(Durum durum) {
 		this.durum = durum;
+	}
+
+	public List getKategoriler() {
+		return kategoriler;
+	}
+
+	public void setKategoriler(List kategoriler) {
+		this.kategoriler = kategoriler;
 	}
 }

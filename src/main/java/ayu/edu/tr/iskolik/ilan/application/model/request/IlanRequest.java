@@ -3,8 +3,11 @@ package ayu.edu.tr.iskolik.ilan.application.model.request;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValidation;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
 import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan.Durum;
+import ayu.edu.tr.iskolik.kategori.application.model.request.KategoriRequest;
+import ayu.edu.tr.iskolik.kategori.domain.model.entity.Kategori;
 import ayu.edu.tr.iskolik.kullanici.application.model.request.KurumsalKullaniciRequest;
 import java.time.LocalDate;
+import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
@@ -48,6 +51,8 @@ public class IlanRequest {
 
 	@PositiveOrZero(message = "validation.request.field.negative", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private int maxMaas;
+
+	private List<KategoriRequest> kategoriler;
 
 	private Durum durum;
 
@@ -170,6 +175,14 @@ public class IlanRequest {
 
 	public void setMaxMaas(int maxMaas) {
 		this.maxMaas = maxMaas;
+	}
+
+	public List<KategoriRequest> getKategoriler() {
+		return kategoriler;
+	}
+
+	public void setKategoriler(List<KategoriRequest> kategoriler) {
+		this.kategoriler = kategoriler;
 	}
 
 	public Durum getDurum() {
