@@ -14,6 +14,11 @@ public class KurumsalKullanici extends Kullanici {
 	@Column(name = "calisan_sayisi", nullable = false)
 	private int calisanSayisi;
 
+	public KurumsalKullanici() {
+		super();
+		setTip("Kurumsal");
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof KurumsalKullanici)) {

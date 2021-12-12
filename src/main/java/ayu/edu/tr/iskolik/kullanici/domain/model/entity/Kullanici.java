@@ -26,6 +26,9 @@ public class Kullanici {
 	@Column(name = "kullanici_id")
 	private Long kullaniciId;
 
+	@Column(name = "tip", nullable = false)
+	private String tip;
+
 	@Column(name = "kullanici_adi", nullable = false)
 	private String kullaniciAdi;
 
@@ -44,7 +47,6 @@ public class Kullanici {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "iletisim_id")
 	private Iletisim iletisim;
-
 
 	public Kullanici() {
 		this.durum = Durum.ONAY_BEKLIYOR;
@@ -69,6 +71,8 @@ public class Kullanici {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Kullanıcı[");
+		sb.append("kullaniciId=").append(getKullaniciId()).append(",");
+		sb.append("Tip=").append(getTip()).append(",");
 		sb.append("Kullanıcı Adı=").append(getKullaniciAdi()).append(",");
 		sb.append("Email=").append(getEmail()).append(",");
 		sb.append("Durum=").append(getDurum().getAciklama()).append(",");
@@ -99,6 +103,14 @@ public class Kullanici {
 
 	public void setKullaniciId(Long kullaniciId) {
 		this.kullaniciId = kullaniciId;
+	}
+
+	public String getTip() {
+		return tip;
+	}
+
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
 	public String getKullaniciAdi() {

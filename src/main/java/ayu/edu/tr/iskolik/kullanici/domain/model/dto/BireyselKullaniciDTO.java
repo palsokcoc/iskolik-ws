@@ -11,7 +11,7 @@ public class BireyselKullaniciDTO extends KullaniciDTO {
 	private LocalDate dogumTarihi;
 
 	public BireyselKullaniciDTO() {
-		setType("Bireysel");
+		setTip("Bireysel");
 	}
 
 	/* getters-setters */

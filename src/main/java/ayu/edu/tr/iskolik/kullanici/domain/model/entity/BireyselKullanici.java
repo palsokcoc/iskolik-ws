@@ -33,6 +33,11 @@ public class BireyselKullanici extends Kullanici {
 	@JoinColumn(name = "kullanici_id")
 	private Profil profil;
 
+	public BireyselKullanici() {
+		super();
+		setTip("Bireysel");
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof BireyselKullanici)) {

@@ -7,8 +7,10 @@ import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
 import ayu.edu.tr.iskolik.kullanici.application.model.mapper.KullaniciRequestMapper;
 import ayu.edu.tr.iskolik.kullanici.application.model.request.KullaniciRequest;
+import ayu.edu.tr.iskolik.kullanici.domain.model.dto.BireyselKullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.ElemanAramaSonucuDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KullaniciDTO;
+import ayu.edu.tr.iskolik.kullanici.domain.repository.KullaniciSpecification;
 import ayu.edu.tr.iskolik.kullanici.domain.service.KullaniciService;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -46,15 +48,16 @@ public class KullaniciController extends BaseController {
 
 	@GetMapping(value = "")
 	public ResponseEntity<GenericServerResponse> getKullaniciList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
-		BaseSpecification specification = new BaseSpecification(filters);
+		BaseSpecification specification = new KullaniciSpecification(filters);
 		List<KullaniciDTO> kullaniciDTOList = kullaniciService.findAll(specification, pageable);
 		return createResponseForSuccess(HttpStatus.OK, kullaniciDTOList);
 	}
 
 	@GetMapping(value = "/aramaSonucu")
 	public ResponseEntity<GenericServerResponse> getKullaniciListForElemanArama(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
-		BaseSpecification specification = new BaseSpecification(filters);
-		List<ElemanAramaSonucuDTO> aramaSonucuDTOList = kullaniciService.findBireyselKullaniciOzet(specification, pageable);
+		BaseSpecification specification = new KullaniciSpecification(filters);
+//		List<ElemanAramaSonucuDTO> aramaSonucuDTOList = kullaniciService.findBireyselKullaniciOzet(specification, pageable);
+		List<BireyselKullaniciDTO> aramaSonucuDTOList = kullaniciService.findBireyselKullanici(specification, pageable);
 		return createResponseForSuccess(HttpStatus.OK, aramaSonucuDTOList);
 	}
 

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class KullaniciDTO {
 
-	private String type;
+	private String tip;
 	private Long kullaniciId;
 	private String kullaniciAdi;
 	private String email;
@@ -15,12 +15,12 @@ public class KullaniciDTO {
 	private IletisimDTO iletisim;
 
 	/* getters-setters */
-	public String getType() {
-		return type;
+	public String getTip() {
+		return tip;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
 	public Long getKullaniciId() {

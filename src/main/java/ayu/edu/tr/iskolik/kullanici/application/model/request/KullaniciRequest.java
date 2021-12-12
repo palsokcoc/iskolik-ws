@@ -14,7 +14,7 @@ import javax.validation.groups.Default;
 @JsonTypeInfo(
 		use = JsonTypeInfo.Id.NAME,
 		include = JsonTypeInfo.As.PROPERTY,
-		property = "type")
+		property = "tip")
 @JsonSubTypes({
 		@Type(value = BireyselKullaniciRequest.class, name = "Bireysel"),
 		@Type(value = KurumsalKullaniciRequest.class, name = "Kurumsal")
@@ -22,7 +22,7 @@ import javax.validation.groups.Default;
 public class KullaniciRequest {
 
 	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
-	private String type;
+	private String tip;
 
 	@NotNull(message = "validation.request.field.null", groups = {PutValidation.class, Default.class})
 	private Long kullaniciId;
@@ -43,12 +43,12 @@ public class KullaniciRequest {
 	private IletisimDTO iletisim;
 
 	/* getters-setters */
-	public String getType() {
-		return type;
+	public String getTip() {
+		return tip;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
 	public Long getKullaniciId() {

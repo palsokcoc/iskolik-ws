@@ -2,7 +2,6 @@ package ayu.edu.tr.iskolik.kullanici.application.model.request;
 
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValidation;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
-import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici.Cinsiyet;
 import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
@@ -21,10 +20,6 @@ public class BireyselKullaniciRequest extends KullaniciRequest {
 
 	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private LocalDate dogumTarihi;
-
-	public BireyselKullaniciRequest() {
-		setType("Bireysel");
-	}
 
 	/* getters-setters */
 	public String getAd() {

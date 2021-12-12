@@ -13,10 +13,6 @@ public class KurumsalKullaniciRequest extends KullaniciRequest {
 	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private int calisanSayisi;
 
-	public KurumsalKullaniciRequest() {
-		setType("Bireysel");
-	}
-
 	/* getters-setters */
 	public String getAd() {
 		return ad;

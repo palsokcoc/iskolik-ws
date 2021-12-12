@@ -39,6 +39,9 @@ public class BaseSpecification<T> implements Specification<T> {
 		this.filters = filters;
 	}
 
+	public void addFilter(Filter filter) {
+		this.filters.addFilter(filter);
+	}
 	/**
 	 * Bu metot JpaSpecificationExecutor'ı extend eden Repository sınıflarında parametre olarak Specification alan metotlar çağrıldığında
 	 * Hibernate tarafından otomatik olarak çağrılır ve sql sorgularının bu metot tarafından dönülen predicate'lara göre üretilmesi sağlanır.

@@ -22,6 +22,7 @@ create table iskolik.iletisim (
 
 create table iskolik.kullanici (
     kullanici_id  serial,
+    tip           text,
     kullanici_adi text unique not null,
     email         text unique not null,
     durum         text        not null, --OnayBekliyor,Aktif,Pasif,Silindi

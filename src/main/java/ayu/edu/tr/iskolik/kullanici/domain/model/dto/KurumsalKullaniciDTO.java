@@ -6,7 +6,7 @@ public class KurumsalKullaniciDTO extends KullaniciDTO {
 	private int calisanSayisi;
 
 	public KurumsalKullaniciDTO() {
-		setType("Kurumsal");
+		setTip("Kurumsal");
 	}
 
 	/* getters-setters */

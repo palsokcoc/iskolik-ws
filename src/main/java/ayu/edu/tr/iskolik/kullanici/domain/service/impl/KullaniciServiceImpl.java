@@ -2,12 +2,17 @@ package ayu.edu.tr.iskolik.kullanici.domain.service.impl;
 
 import ayu.edu.tr.iskolik.common.domain.exception.ErrorCode;
 import ayu.edu.tr.iskolik.common.domain.exception.IskolikOrtakException;
+import ayu.edu.tr.iskolik.common.domain.repository.BaseSpecification;
+import ayu.edu.tr.iskolik.common.domain.repository.filter.Filter;
+import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
+import ayu.edu.tr.iskolik.kullanici.domain.model.dto.BireyselKullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.ElemanAramaSonucuDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
 import ayu.edu.tr.iskolik.kullanici.domain.repository.KullaniciRepository;
 import ayu.edu.tr.iskolik.kullanici.domain.service.KullaniciService;
+import com.fasterxml.jackson.databind.ser.Serializers.Base;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Pageable;
@@ -51,6 +56,13 @@ public class KullaniciServiceImpl implements KullaniciService {
 	public List<ElemanAramaSonucuDTO> findBireyselKullaniciOzet(Specification specification, Pageable pageable) {
 		return kullaniciRepository.findBireyselKullaniciOzet(specification, pageable);
 	}
+
+	@Override
+	public List<BireyselKullaniciDTO> findBireyselKullanici(BaseSpecification specification, Pageable pageable) {
+		specification.addFilter(new Filter("tip=Bireysel"));
+		return kullaniciDTOMapper.toKullaniciDTOList(kullaniciRepository.findAll(specification, pageable).toList());
+	}
+
 
 	@Override
 	public KullaniciDTO saveKullanici(KullaniciDTO kullaniciDTO) {
