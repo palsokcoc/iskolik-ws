@@ -1,6 +1,6 @@
 package ayu.edu.tr.iskolik.ilan.domain.model.dto;
 
-import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan;
+import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan.Durum;
 import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KurumsalKullaniciDTO;
 import java.time.LocalDate;
 
@@ -21,7 +21,7 @@ public class IlanDTO {
 	private String tercihenOzellikler;
 	private int minMaas;
 	private int maxMaas;
-	private Ilan.Durum durum;
+	private Durum durum;
 
 	/* getters-setters */
 	public Long getIlanId() {
@@ -144,11 +144,11 @@ public class IlanDTO {
 		this.maxMaas = maxMaas;
 	}
 
-	public Ilan.Durum getDurum() {
+	public Durum getDurum() {
 		return durum;
 	}
 
-	public void setDurum(Ilan.Durum durum) {
+	public void setDurum(Durum durum) {
 		this.durum = durum;
 	}
 }

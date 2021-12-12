@@ -183,6 +183,12 @@ public class BaseSpecification<T> implements Specification<T> {
 				return Long.valueOf(value);
 			} else if (javaType == Double.class) {
 				return Double.valueOf(value);
+			} else if (javaType.isEnum()) {
+				final Enum<?> enumConstant = (Enum<?>) Arrays.stream(javaType.getEnumConstants())
+						.filter(_enumConstant -> ((Enum<?>) _enumConstant).name().equals(value))
+						.findFirst()
+						.orElseThrow(() -> new IskolikOrtakException(ErrorCode.VALIDATION_REQUEST_FILTER_VALUE_NOT_VALID, value));
+				return enumConstant;
 			}
 			else if (javaType == String.class) {
 				return value.replaceAll("'","");

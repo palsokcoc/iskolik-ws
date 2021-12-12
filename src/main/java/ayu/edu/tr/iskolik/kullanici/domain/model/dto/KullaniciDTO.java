@@ -1,10 +1,7 @@
 package ayu.edu.tr.iskolik.kullanici.domain.model.dto;
 
 import ayu.edu.tr.iskolik.iletisim.domain.model.dto.IletisimDTO;
-import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici.Durum;
 import java.time.LocalDate;
 
 public class KullaniciDTO {
@@ -13,7 +10,7 @@ public class KullaniciDTO {
 	private Long kullaniciId;
 	private String kullaniciAdi;
 	private String email;
-	private Kullanici.Durum durum;
+	private Durum durum;
 	private LocalDate kayitTarihi;
 	private IletisimDTO iletisim;
 
@@ -50,11 +47,11 @@ public class KullaniciDTO {
 		this.email = email;
 	}
 
-	public ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici.Durum getDurum() {
+	public Durum getDurum() {
 		return durum;
 	}
 
-	public void setDurum(ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici.Durum durum) {
+	public void setDurum(Durum durum) {
 		this.durum = durum;
 	}
 

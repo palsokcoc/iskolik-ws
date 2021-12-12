@@ -12,9 +12,7 @@ import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
 import ayu.edu.tr.iskolik.kullanici.domain.repository.KullaniciRepository;
-import ayu.edu.tr.iskolik.profil.domain.model.dto.SertifikaDTO;
 import ayu.edu.tr.iskolik.profil.domain.model.dto.YetenekDTO;
-import ayu.edu.tr.iskolik.profil.domain.model.entity.Sertifika;
 import ayu.edu.tr.iskolik.profil.domain.model.entity.Yetenek;
 import ayu.edu.tr.iskolik.profil.domain.model.mapper.YetenekDTOMapper;
 import ayu.edu.tr.iskolik.profil.domain.repository.YetenekRepository;
@@ -47,8 +45,7 @@ public class YetenekServiceImpl implements YetenekService {
 	}
 
 	@Override
-	public List<YetenekDTO> findAllByKullaniciId(Long kullaniciId) {
-		Filters filters = new Filters();
+	public List<YetenekDTO> findAllByKullaniciId(Long kullaniciId, Filters filters) {
 		filters.addFilter(new Filter("profil.kullaniciId=" + kullaniciId));
 		BaseSpecification<Yetenek> specification = new BaseSpecification<>(filters);
 		return yetenekDTOMapper.toYetenekDTOList(yetenekRepository.findAll(specification));

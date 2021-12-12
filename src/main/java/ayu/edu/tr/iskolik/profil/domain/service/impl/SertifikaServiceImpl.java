@@ -15,9 +15,6 @@ import ayu.edu.tr.iskolik.profil.domain.model.mapper.SertifikaDTOMapper;
 import ayu.edu.tr.iskolik.profil.domain.repository.SertifikaRepository;
 import ayu.edu.tr.iskolik.profil.domain.service.SertifikaService;
 import java.util.List;
-import java.util.Optional;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,8 +37,7 @@ public class SertifikaServiceImpl implements SertifikaService {
 	}
 
 	@Override
-	public List<SertifikaDTO> findAllByKullaniciId(Long kullaniciId) {
-		Filters filters = new Filters();
+	public List<SertifikaDTO> findAllByKullaniciId(Long kullaniciId, Filters filters) {
 		filters.addFilter(new Filter("profil.kullaniciId=" + kullaniciId));
 		BaseSpecification<Sertifika> specification = new BaseSpecification<>(filters);
 		return sertifikaDTOMapper.toSertifikaDTOList(sertifikaRepository.findAll(specification));

@@ -2,10 +2,10 @@ package ayu.edu.tr.iskolik.profil.application.controller;
 
 import ayu.edu.tr.iskolik.common.application.controller.BaseController;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
+import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
 import ayu.edu.tr.iskolik.profil.application.model.mapper.SinavRequestMapper;
 import ayu.edu.tr.iskolik.profil.application.model.request.SinavRequest;
-import ayu.edu.tr.iskolik.profil.domain.model.dto.SertifikaDTO;
 import ayu.edu.tr.iskolik.profil.domain.model.dto.SinavDTO;
 import ayu.edu.tr.iskolik.profil.domain.service.SinavService;
 import java.util.List;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,8 +34,8 @@ public class SinavController extends BaseController {
 	}
 
 	@GetMapping(value = "/")
-	public ResponseEntity<GenericServerResponse> getAllSeinavByKullaniciId(@PathVariable Long kullaniciId) {
-		List<SinavDTO> sinavDTOList = sinavService.findAllByKullaniciId(kullaniciId);
+	public ResponseEntity<GenericServerResponse> getAllSeinavByKullaniciId(@PathVariable Long kullaniciId, @ModelAttribute() Filters filters) {
+		List<SinavDTO> sinavDTOList = sinavService.findAllByKullaniciId(kullaniciId, filters);
 		return createResponseForSuccess(HttpStatus.OK, sinavDTOList);
 	}
 

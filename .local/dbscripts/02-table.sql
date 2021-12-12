@@ -141,8 +141,10 @@ create table iskolik.basvuru (
     kullanici_id   int,
     ilan_id        int,
     basvuru_tarihi date not null,
+    iptal_tarihi  date,
     durum          varchar(10), --Aktif,İptal, Kapalı
     primary key (basvuru_id),
+    unique (kullanici_id, ilan_id),
     constraint fk_basvuru__bireysel_kullanici
         foreign key (kullanici_id)
             references iskolik.bireysel_kullanici,

@@ -9,9 +9,7 @@ import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
 import ayu.edu.tr.iskolik.kullanici.domain.repository.KullaniciRepository;
-import ayu.edu.tr.iskolik.profil.domain.model.dto.SertifikaDTO;
 import ayu.edu.tr.iskolik.profil.domain.model.dto.SinavDTO;
-import ayu.edu.tr.iskolik.profil.domain.model.entity.Sertifika;
 import ayu.edu.tr.iskolik.profil.domain.model.entity.Sinav;
 import ayu.edu.tr.iskolik.profil.domain.model.mapper.SinavDTOMapper;
 import ayu.edu.tr.iskolik.profil.domain.repository.SinavRepository;
@@ -39,8 +37,7 @@ public class SinavServiceImpl implements SinavService {
 	}
 
 	@Override
-	public List<SinavDTO> findAllByKullaniciId(Long kullaniciId) {
-		Filters filters = new Filters();
+	public List<SinavDTO> findAllByKullaniciId(Long kullaniciId, Filters filters) {
 		filters.addFilter(new Filter("profil.kullaniciId=" + kullaniciId));
 		BaseSpecification<Sinav> specification = new BaseSpecification<>(filters);
 		return sinavDTOMapper.toSinavDTOList(sinavRepository.findAll(specification));

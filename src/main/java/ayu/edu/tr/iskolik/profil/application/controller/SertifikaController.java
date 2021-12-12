@@ -2,6 +2,7 @@ package ayu.edu.tr.iskolik.profil.application.controller;
 
 import ayu.edu.tr.iskolik.common.application.controller.BaseController;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
+import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
 import ayu.edu.tr.iskolik.profil.application.model.mapper.SertifikaRequestMapper;
 import ayu.edu.tr.iskolik.profil.application.model.request.SertifikaRequest;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +34,8 @@ public class SertifikaController extends BaseController {
 	}
 
 	@GetMapping(value = "/")
-	public ResponseEntity<GenericServerResponse> getAllSertifikaByKullaniciId(@PathVariable Long kullaniciId) {
-		List<SertifikaDTO> sertifikaDTOList = sertifikaService.findAllByKullaniciId(kullaniciId);
+	public ResponseEntity<GenericServerResponse> getAllSertifikaByKullaniciId(@PathVariable Long kullaniciId, @ModelAttribute() Filters filters) {
+		List<SertifikaDTO> sertifikaDTOList = sertifikaService.findAllByKullaniciId(kullaniciId, filters);
 		return createResponseForSuccess(HttpStatus.OK, sertifikaDTOList);
 	}
 

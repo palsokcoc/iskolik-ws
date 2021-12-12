@@ -3,16 +3,11 @@ package ayu.edu.tr.iskolik.kullanici.application.model.request;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValidation;
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
 import ayu.edu.tr.iskolik.iletisim.domain.model.dto.IletisimDTO;
-import ayu.edu.tr.iskolik.kullanici.domain.model.dto.BireyselKullaniciDTO;
-import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KurumsalKullaniciDTO;
-import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici.Durum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.LocalDate;
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
@@ -39,7 +34,7 @@ public class KullaniciRequest {
 	private String email;
 
 	@NotNull(message = "validation.request.field.null", groups = {Default.class})
-	private Kullanici.Durum durum;
+	private Durum durum;
 
 	@NotNull(message = "validation.request.field.null", groups = {Default.class})
 	private LocalDate kayitTarihi;

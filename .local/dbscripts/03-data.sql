@@ -153,11 +153,12 @@ insert into iskolik.ilan (ilan_id,kullanici_id,unvan,is_part_time,yer,giris_tari
   values (20, 12, 'Kıdemli Yazılım Geliştirme Uzmanı', false,'Ankara','2021-09-25','2021-10-01',null,'2021-12-30',0,'Ankara yerleşkemizde çalışmak üzere tam zamanlı çalışma arkadaşları arıyoruz.','İngilizce','Almanca',0,0,'Aktif');
 select setval('iskolik.ilan_ilan_id_seq', 21, true);
 
-insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,durum) values (1,1,11,'2021-11-27','Aktif');
-insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,durum) values (2,1,13,'2021-10-25','Aktif');
-insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,durum) values (3,1,15,'2021-09-21','Kapalı');
-insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,durum) values (4,1,16,'2021-08-18','Kapalı');
-insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,durum) values (5,1,19,'2021-07-13','İptal');
+insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,iptal_tarihi,durum) values (1,1,11,'2021-11-27',null,'Aktif');
+insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,iptal_tarihi,durum) values (2,1,13,'2021-10-25',null,'Aktif');
+insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,iptal_tarihi,durum) values (3,1,15,'2021-09-21',null,'Tamamlandı');
+insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,iptal_tarihi,durum) values (4,1,16,'2021-08-18',null,'Tamamlandı');
+insert into iskolik.basvuru (basvuru_id,kullanici_id,ilan_id,basvuru_tarihi,iptal_tarihi,durum) values (5,1,19,'2021-07-13',null,'İptal');
+select setval('iskolik.basvuru_basvuru_id_seq', 6, true);
 
 insert into iskolik.ilan_kategori (ilan_id,kategori_id,aciklama) values (11,6,'En az 5 yıl tecrübe');
 insert into iskolik.ilan_kategori (ilan_id,kategori_id,aciklama) values (11,7,'En az 10 yıl tecrübe');
