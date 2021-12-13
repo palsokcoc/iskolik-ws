@@ -1,12 +1,16 @@
 package ayu.edu.tr.iskolik.basvuru.domain.model.entity;
 
 
+import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan;
+import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +22,13 @@ public class Basvuru {
 	@Column(name = "basvuru_id")
 	private Long basvuruId;
 
-	@Column(name = "kullanici_id")
-	private Long kullaniciId;
+	@ManyToOne
+	@JoinColumn(name = "kullanici_id")
+	private BireyselKullanici kullanici;
 
-//	@ManyToOne
-//	@JoinColumn(name = "ilan_id")
-	@Column(name = "ilan_id")
-	private Long ilanId;
+	@ManyToOne
+	@JoinColumn(name = "ilan_id")
+	private Ilan ilan;
 
 	@Column(name = "basvuru_tarihi", nullable = false)
 	private LocalDate basvuruTarihi;
@@ -38,8 +42,8 @@ public class Basvuru {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Basvuru[");
 		sb.append("basvuruId=").append(getBasvuruId()).append(",");
-		sb.append("kullaniciId=").append(getKullaniciId()).append(",");
-		sb.append("ilanId=").append(getIlanId()).append(",");
+		sb.append("kullanici=").append(getKullanici()).append(",");
+		sb.append("ilan=").append(getIlan()).append(",");
 		sb.append("basvuruTarihi=").append(getBasvuruTarihi()).append(",");
 		sb.append("durum=").append(getDurum().getAciklama()).append(",");
 		sb.append("]");
@@ -74,20 +78,20 @@ public class Basvuru {
 		this.basvuruId = basvuruId;
 	}
 
-	public Long getKullaniciId() {
-		return kullaniciId;
+	public BireyselKullanici getKullanici() {
+		return kullanici;
 	}
 
-	public void setKullaniciId(Long kullaniciId) {
-		this.kullaniciId = kullaniciId;
+	public void setKullanici(BireyselKullanici kullanici) {
+		this.kullanici = kullanici;
 	}
 
-	public Long getIlanId() {
-		return ilanId;
+	public Ilan getIlan() {
+		return ilan;
 	}
 
-	public void setIlanId(Long ilanId) {
-		this.ilanId = ilanId;
+	public void setIlan(Ilan ilan) {
+		this.ilan = ilan;
 	}
 
 	public LocalDate getBasvuruTarihi() {

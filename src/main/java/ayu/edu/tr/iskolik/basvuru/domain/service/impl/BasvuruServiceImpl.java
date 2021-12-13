@@ -11,6 +11,12 @@ import ayu.edu.tr.iskolik.common.domain.repository.BaseSpecification;
 import ayu.edu.tr.iskolik.common.domain.repository.filter.Filter;
 import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.basvuru.domain.model.entity.Basvuru.Durum;
+import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan;
+import ayu.edu.tr.iskolik.ilan.domain.model.mapper.IlanDTOMapper;
+import ayu.edu.tr.iskolik.ilan.domain.repository.IlanRepository;
+import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
+import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
+import ayu.edu.tr.iskolik.kullanici.domain.repository.KullaniciRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -28,23 +34,33 @@ public class BasvuruServiceImpl implements BasvuruService {
 	private final BasvuruRepository basvuruRepository;
 	private final BasvuruDTOMapper basvuruDTOMapper;
 
-	public BasvuruServiceImpl(BasvuruRepository basvuruRepository, BasvuruDTOMapper basvuruDTOMapper) {
+	private KullaniciRepository kullaniciRepository;
+	private KullaniciDTOMapper kullaniciDTOMapper;
+
+	private IlanRepository ilanRepository;
+	private IlanDTOMapper ilanDTOMapper;
+
+	public BasvuruServiceImpl(BasvuruRepository basvuruRepository, BasvuruDTOMapper basvuruDTOMapper, KullaniciRepository kullaniciRepository, KullaniciDTOMapper kullaniciDTOMapper, IlanRepository ilanRepository, IlanDTOMapper ilanDTOMapper) {
 		this.basvuruRepository = basvuruRepository;
 		this.basvuruDTOMapper = basvuruDTOMapper;
+		this.kullaniciRepository = kullaniciRepository;
+		this.kullaniciDTOMapper = kullaniciDTOMapper;
+		this.ilanRepository = ilanRepository;
+		this.ilanDTOMapper = ilanDTOMapper;
 	}
 
 	@Override
-	public List<BasvuruDTO> findAllByIlanId(Long ilanId, Filters filters) {
+	public List<BasvuruDTO> findAllByIlanId(Long ilanId, Filters filters, Pageable pageable) {
 		filters.addFilter(new Filter("ilanId=" + ilanId));
 		Specification specification = new BaseSpecification(filters);
-		return basvuruDTOMapper.toBasvuruDTOList(basvuruRepository.findAll(specification));
+		return basvuruDTOMapper.toBasvuruDTOList(basvuruRepository.findAll(specification, pageable).toList());
 	}
 
 	@Override
-	public List<BasvuruDTO> findAllByKullaniciId(Long kullaniciId, Filters filters) {
-		filters.addFilter(new Filter("kullaniciId=" + kullaniciId));
+	public List<BasvuruDTO> findAllByKullaniciId(Long kullaniciId, Filters filters, Pageable pageable) {
+		filters.addFilter(new Filter("kullanici.kullaniciId=" + kullaniciId));
 		Specification specification = new BaseSpecification(filters);
-		return basvuruDTOMapper.toBasvuruDTOList(basvuruRepository.findAll(specification));
+		return basvuruDTOMapper.toBasvuruDTOList(basvuruRepository.findAll(specification, pageable).toList());
 	}
 
 	@Override
@@ -72,7 +88,9 @@ public class BasvuruServiceImpl implements BasvuruService {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_FIELD_NOT_NULL, "id");
 		}
 
-		Basvuru basvuru = basvuruRepository.findByKullaniciIdAndIlanId(basvuruDTO.getKullaniciId(), basvuruDTO.getIlanId());
+		Kullanici kullanici = kullaniciRepository.findById(basvuruDTO.getKullanici().getKullaniciId()).orElseThrow(() -> new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(basvuruDTO.getKullanici().getKullaniciId())));
+		Ilan ilan = ilanRepository.findById(basvuruDTO.getIlan().getIlanId()).orElseThrow(() -> new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_NOT_FOUND, String.valueOf(basvuruDTO.getIlan().getIlanId())));
+		Basvuru basvuru = basvuruRepository.findByKullaniciAndIlan(kullanici, ilan);
 		if(basvuru != null) {
 			throw new IskolikOrtakException(ErrorCode.VALIDATION_BUSINESS_RESOURCE_ALREADY_EXISTS, "Başvuru");
 		}

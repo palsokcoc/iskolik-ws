@@ -1,13 +1,15 @@
 package ayu.edu.tr.iskolik.basvuru.domain.model.dto;
 
 import ayu.edu.tr.iskolik.basvuru.domain.model.entity.Basvuru.Durum;
+import ayu.edu.tr.iskolik.ilan.domain.model.dto.IlanDTO;
+import ayu.edu.tr.iskolik.kullanici.domain.model.dto.BireyselKullaniciDTO;
 import java.time.LocalDate;
 
 public class BasvuruDTO {
 
 	private Long basvuruId;
-	private Long kullaniciId;
-	private Long ilanId;
+	private BireyselKullaniciDTO kullanici;
+	private IlanDTO ilan;
 	private LocalDate basvuruTarihi;
 	private LocalDate iptalTarihi;
 	private Durum durum;
@@ -21,20 +23,20 @@ public class BasvuruDTO {
 		this.basvuruId = basvuruId;
 	}
 
-	public Long getKullaniciId() {
-		return kullaniciId;
+	public BireyselKullaniciDTO getKullanici() {
+		return kullanici;
 	}
 
-	public void setKullaniciId(Long kullaniciId) {
-		this.kullaniciId = kullaniciId;
+	public void setKullanici(BireyselKullaniciDTO kullanici) {
+		this.kullanici = kullanici;
 	}
 
-	public Long getIlanId() {
-		return ilanId;
+	public IlanDTO getIlan() {
+		return ilan;
 	}
 
-	public void setIlanId(Long ilanId) {
-		this.ilanId = ilanId;
+	public void setIlan(IlanDTO ilan) {
+		this.ilan = ilan;
 	}
 
 	public LocalDate getBasvuruTarihi() {

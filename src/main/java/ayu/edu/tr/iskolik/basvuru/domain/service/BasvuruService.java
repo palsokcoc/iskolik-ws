@@ -9,8 +9,8 @@ import org.springframework.data.jpa.domain.Specification;
 
 public interface BasvuruService {
 
-	List<BasvuruDTO> findAllByIlanId(Long ilanId, Filters filters);
-	List<BasvuruDTO> findAllByKullaniciId(Long kullaniciId, Filters filters);
+	List<BasvuruDTO> findAllByIlanId(Long ilanId, Filters filters, Pageable pageable);
+	List<BasvuruDTO> findAllByKullaniciId(Long kullaniciId, Filters filters, Pageable pageable);
 
 	BasvuruDTO findBasvuruById(Long id);
 

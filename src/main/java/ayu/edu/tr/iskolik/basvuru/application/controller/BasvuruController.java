@@ -9,8 +9,11 @@ import ayu.edu.tr.iskolik.common.application.model.request.validation.PostValida
 import ayu.edu.tr.iskolik.common.application.model.request.validation.PutValidation;
 import ayu.edu.tr.iskolik.common.domain.repository.filter.Filters;
 import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
+import ayu.edu.tr.iskolik.infrastructure.configuration.IskolikConfigutarion;
 import java.util.List;
 import java.util.Map;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -38,14 +41,14 @@ public class BasvuruController extends BaseController {
 	}
 
 	@GetMapping(value = "/ilan/{ilanId}/basvuru/")
-	public ResponseEntity<GenericServerResponse> getAllBasvuruByIlanId(@PathVariable Long ilanId, @ModelAttribute Filters filters) {
-		List<BasvuruDTO> basvuruDTOList = basvuruService.findAllByIlanId(ilanId, filters);
+	public ResponseEntity<GenericServerResponse> getAllBasvuruByIlanId(@PathVariable Long ilanId, @ModelAttribute Filters filters, @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
+		List<BasvuruDTO> basvuruDTOList = basvuruService.findAllByIlanId(ilanId, filters, pageable);
 		return createResponseForSuccess(HttpStatus.OK, basvuruDTOList);
 	}
 
 	@GetMapping(value = "/kullanici/{kullaniciId}/basvuru/")
-	public ResponseEntity<GenericServerResponse> getAllBasvuruByKullaniciId(@PathVariable Long kullaniciId, @ModelAttribute Filters filters) {
-		List<BasvuruDTO> basvuruDTOList = basvuruService.findAllByKullaniciId(kullaniciId, filters);
+	public ResponseEntity<GenericServerResponse> getAllBasvuruByKullaniciId(@PathVariable Long kullaniciId, @ModelAttribute Filters filters, @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
+		List<BasvuruDTO> basvuruDTOList = basvuruService.findAllByKullaniciId(kullaniciId, filters, pageable);
 		return createResponseForSuccess(HttpStatus.OK, basvuruDTOList);
 	}
 
@@ -53,7 +56,7 @@ public class BasvuruController extends BaseController {
 	public ResponseEntity<GenericServerResponse> saveBasvuru(@Validated(PostValidation.class) @RequestBody BasvuruRequest basvuruRequest) {
 		BasvuruDTO requestBasvuruDTO = basvuruRequestMapper.toBasvuruDTO(basvuruRequest);
 		BasvuruDTO responseBasvuruDTO = basvuruService.saveBasvuru(requestBasvuruDTO);
-		return createResponseForSuccess(HttpStatus.CREATED, responseBasvuruDTO, responseBasvuruDTO.getIlanId() + " nolu ilana başarıyla başvuru yapıldı");
+		return createResponseForSuccess(HttpStatus.CREATED, responseBasvuruDTO, responseBasvuruDTO.getIlan() + " nolu ilana başarıyla başvuru yapıldı");
 	}
 
 	@PutMapping(value = "/basvuru/{basvuruId}")

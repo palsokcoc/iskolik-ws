@@ -14,6 +14,7 @@ import ayu.edu.tr.iskolik.profil.domain.model.dto.YetenekDTO;
 import ayu.edu.tr.iskolik.profil.domain.model.entity.Sertifika;
 import ayu.edu.tr.iskolik.profil.domain.model.entity.Sinav;
 import ayu.edu.tr.iskolik.profil.domain.model.entity.Yetenek;
+import ayu.edu.tr.iskolik.profil.domain.model.mapper.ProfilDTOMapper;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,7 +22,7 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ProfilDTOMapper.class})
 public interface KullaniciDTOMapper {
 
 	// Entity --> DTO
@@ -68,15 +69,5 @@ public interface KullaniciDTOMapper {
 	@Mapping(target = "kayitTarihi", ignore = true)
 	@Mapping(target = "sifreHash", ignore = true)
 	KurumsalKullanici toKurumsalKullanici(KurumsalKullaniciDTO kurumsalKullaniciDTO);
-
-
-	@Mapping(target = "profil", ignore = true)
-	SertifikaDTO toSertifikaDTO(Sertifika sertifika);
-
-	@Mapping(target = "profil", ignore = true)
-	SinavDTO toSinavDTO(Sinav sinav);
-
-	@Mapping(target = "profil", ignore = true)
-	YetenekDTO toYetenekDTO(Yetenek yetenek);
 }
 
