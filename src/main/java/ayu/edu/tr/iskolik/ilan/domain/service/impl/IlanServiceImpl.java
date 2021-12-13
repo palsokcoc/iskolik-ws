@@ -13,9 +13,13 @@ import ayu.edu.tr.iskolik.kullanici.domain.model.entity.KurumsalKullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.mapper.KullaniciDTOMapper;
 import ayu.edu.tr.iskolik.kullanici.domain.service.KullaniciService;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -55,6 +59,25 @@ public class IlanServiceImpl implements IlanService {
 	@Override
 	public List<IlanDTO> findAll(Specification specification, Pageable pageable) {
 		return ilanDTOMapper.toIlanDTOList(ilanRepository.findAll(specification, pageable).toList());
+	}
+
+	@Override
+	public List<IlanDTO> ilanAra(String filter, Durum durum, Pageable pageable) {
+		if(filter == null || filter.equals("")) {
+			return ilanDTOMapper.toIlanDTOList(ilanRepository.ilanAra(filter, durum, pageable));
+		}
+
+		Set<Ilan> result = new HashSet<>();
+		String[] filters = filter.split("[ ]+");
+		for(String _filter: filters) {
+			if(result.isEmpty()) {
+				result = new HashSet<>(ilanRepository.ilanAra(_filter, durum, pageable));
+			} else {
+				result.retainAll(ilanRepository.ilanAra(_filter, durum, pageable));
+			}
+		}
+
+		return ilanDTOMapper.toIlanDTOList(new ArrayList<>(result));
 	}
 
 	@Override

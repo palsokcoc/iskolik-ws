@@ -9,6 +9,7 @@ import ayu.edu.tr.iskolik.iletisim.application.model.mapper.AdresRequestMapper;
 import ayu.edu.tr.iskolik.iletisim.application.model.request.AdresRequest;
 import ayu.edu.tr.iskolik.iletisim.domain.model.dto.AdresDTO;
 import ayu.edu.tr.iskolik.iletisim.domain.service.AdresService;
+import ayu.edu.tr.iskolik.infrastructure.configuration.IskolikConfigutarion;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -44,7 +45,7 @@ public class AdresController extends BaseController {
 	}
 
 	@GetMapping(value = "")
-	public ResponseEntity<GenericServerResponse> getAdresList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+	public ResponseEntity<GenericServerResponse> getAdresList(@ModelAttribute() Filters filters, @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
 		BaseSpecification specification = new BaseSpecification(filters);
 		List<AdresDTO> musteriDTOList = adresService.findAll(specification,pageable);
 		return createResponseForSuccess(HttpStatus.OK, musteriDTOList);

@@ -17,12 +17,10 @@ public class BasvuruRequest {
 	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private Long ilanId;
 
-	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private LocalDate basvuruTarihi;
 
 	private LocalDate iptalTarihi;
 
-	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private Durum durum;
 
 	/* getters-setters */

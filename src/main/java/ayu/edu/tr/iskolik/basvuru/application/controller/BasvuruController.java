@@ -53,7 +53,7 @@ public class BasvuruController extends BaseController {
 	public ResponseEntity<GenericServerResponse> saveBasvuru(@Validated(PostValidation.class) @RequestBody BasvuruRequest basvuruRequest) {
 		BasvuruDTO requestBasvuruDTO = basvuruRequestMapper.toBasvuruDTO(basvuruRequest);
 		BasvuruDTO responseBasvuruDTO = basvuruService.saveBasvuru(requestBasvuruDTO);
-		return createResponseForSuccess(HttpStatus.CREATED, responseBasvuruDTO, responseBasvuruDTO.getBasvuruId() + " nolu basvuru başarıyla kaydedildi");
+		return createResponseForSuccess(HttpStatus.CREATED, responseBasvuruDTO, responseBasvuruDTO.getIlanId() + " nolu ilana başarıyla başvuru yapıldı");
 	}
 
 	@PutMapping(value = "/basvuru/{basvuruId}")

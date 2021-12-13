@@ -41,12 +41,12 @@ public interface KullaniciRepository extends JpaRepository<Kullanici, Long>, Jpa
 			"on yetenek.kategori = kategori " +
 			"where (" +
 			":filter = '' " +
-			"or profil.meslek like %:filter% " +
-			"or profil.unvan like %:filter% " +
-			"or profil.ozgecmis like %:filter% " +
-			"or sertifika.sertifikaAdi like %:filter% " +
-			"or sinav.sinavAdi like %:filter% " +
-			"or kategori.ad like %:filter% " +
+			"or lower(profil.meslek) like lower(concat('%',:filter,'%')) " +
+			"or lower(profil.unvan) like lower(concat('%',:filter,'%')) " +
+			"or lower(profil.ozgecmis) like lower(concat('%',:filter,'%')) " +
+			"or lower(sertifika.sertifikaAdi) like lower(concat('%',:filter,'%')) " +
+			"or lower(sinav.sinavAdi) like lower(concat('%',:filter,'%')) " +
+			"or lower(kategori.ad) like lower(concat('%',:filter,'%')) " +
 			") " +
 			"order by bk.ad, bk.soyad")
 	List<BireyselKullanici> elemanAra(@Param("filter") String filter, Pageable pageable);

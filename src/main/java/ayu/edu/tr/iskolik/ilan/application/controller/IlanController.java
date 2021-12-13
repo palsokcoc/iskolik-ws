@@ -9,6 +9,7 @@ import ayu.edu.tr.iskolik.common.model.response.GenericServerResponse;
 import ayu.edu.tr.iskolik.ilan.application.model.mapper.IlanRequestMapper;
 import ayu.edu.tr.iskolik.ilan.application.model.request.IlanRequest;
 import ayu.edu.tr.iskolik.ilan.domain.model.dto.IlanDTO;
+import ayu.edu.tr.iskolik.ilan.domain.model.entity.Ilan.Durum;
 import ayu.edu.tr.iskolik.ilan.domain.service.IlanService;
 import ayu.edu.tr.iskolik.infrastructure.configuration.IskolikConfigutarion;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,6 +54,12 @@ public class IlanController extends BaseController {
 		BaseSpecification specification = new BaseSpecification(filters);
 		List<IlanDTO> ilanDTOList = ilanService.findAll(specification,pageable);
 		return createResponseForSuccess(HttpStatus.OK, ilanDTOList);
+	}
+
+	@GetMapping(value = "/arama-sonucu")
+	public ResponseEntity<GenericServerResponse> getIlanListForIlanArama(@RequestParam(defaultValue = "") String filter, @RequestParam(required = false) Durum durum,  @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
+		List<IlanDTO> ilanlar = ilanService.ilanAra(filter, durum, pageable);
+		return createResponseForSuccess(HttpStatus.OK, ilanlar);
 	}
 
 	@PostMapping(value = "/")

@@ -78,6 +78,8 @@ public class BasvuruServiceImpl implements BasvuruService {
 		}
 
 		basvuru = basvuruDTOMapper.toBasvuru(basvuruDTO);
+		basvuru.setBasvuruTarihi(LocalDate.now());
+		basvuru.setDurum(Durum.AKTIF);
 
 		Basvuru savedBasvuru = basvuruRepository.save(basvuru);
 		return basvuruDTOMapper.toBasvuruDTO(savedBasvuru);

@@ -9,6 +9,7 @@ import ayu.edu.tr.iskolik.iletisim.application.model.mapper.IletisimRequestMappe
 import ayu.edu.tr.iskolik.iletisim.application.model.request.IletisimRequest;
 import ayu.edu.tr.iskolik.iletisim.domain.model.dto.IletisimDTO;
 import ayu.edu.tr.iskolik.iletisim.domain.service.IletisimService;
+import ayu.edu.tr.iskolik.infrastructure.configuration.IskolikConfigutarion;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -44,7 +45,7 @@ public class IletisimController extends BaseController {
 	}
 
 	@GetMapping(value = "")
-	public ResponseEntity<GenericServerResponse> getIletisimList(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+	public ResponseEntity<GenericServerResponse> getIletisimList(@ModelAttribute() Filters filters, @PageableDefault(size = IskolikConfigutarion.DEFAULT_PAGE_SIZE) Pageable pageable) {
 		BaseSpecification specification = new BaseSpecification(filters);
 		List<IletisimDTO> musteriDTOList = iletisimService.findAll(specification,pageable);
 		return createResponseForSuccess(HttpStatus.OK, musteriDTOList);
