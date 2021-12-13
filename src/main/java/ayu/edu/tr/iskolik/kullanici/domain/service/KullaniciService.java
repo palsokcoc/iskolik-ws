@@ -13,6 +13,7 @@ public interface KullaniciService {
 	KullaniciDTO findKullaniciById(Long id);
 
 	List<KullaniciDTO> findAll(Specification specification, Pageable pageable);
+	List<BireyselKullaniciDTO> elemanAra(String filter, Pageable pageable);
 	List<ElemanAramaSonucuDTO> findBireyselKullaniciOzet(Specification specification, Pageable pageable);
 	List<BireyselKullaniciDTO> findBireyselKullanici(BaseSpecification specification, Pageable pageable);
 

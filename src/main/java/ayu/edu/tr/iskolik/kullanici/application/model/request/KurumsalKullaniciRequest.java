@@ -8,20 +8,9 @@ import javax.validation.groups.Default;
 public class KurumsalKullaniciRequest extends KullaniciRequest {
 
 	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
-	private String ad;
-
-	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private int calisanSayisi;
 
 	/* getters-setters */
-	public String getAd() {
-		return ad;
-	}
-
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-
 	public int getCalisanSayisi() {
 		return calisanSayisi;
 	}

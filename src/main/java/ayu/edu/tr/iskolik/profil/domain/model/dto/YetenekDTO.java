@@ -1,6 +1,7 @@
 package ayu.edu.tr.iskolik.profil.domain.model.dto;
 
 import ayu.edu.tr.iskolik.kategori.domain.model.dto.KategoriDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class YetenekDTO {
 

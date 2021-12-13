@@ -32,6 +32,9 @@ public class Kullanici {
 	@Column(name = "kullanici_adi", nullable = false)
 	private String kullaniciAdi;
 
+	@Column(name = "ad", nullable = false)
+	private String ad;
+
 	@Column(name = "email", nullable = false)
 	private String email;
 
@@ -119,6 +122,14 @@ public class Kullanici {
 
 	public void setKullaniciAdi(String kullaniciAdi) {
 		this.kullaniciAdi = kullaniciAdi;
+	}
+
+	public String getAd() {
+		return ad;
+	}
+
+	public void setAd(String ad) {
+		this.ad = ad;
 	}
 
 	public String getEmail() {

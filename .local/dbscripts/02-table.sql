@@ -24,6 +24,7 @@ create table iskolik.kullanici (
     kullanici_id  serial,
     tip           text,
     kullanici_adi text unique not null,
+    ad           text not null,
     email         text unique not null,
     durum         text        not null, --OnayBekliyor,Aktif,Pasif,Silindi
     kayit_tarihi  date        not null default current_date,
@@ -37,7 +38,6 @@ create table iskolik.kullanici (
 
 create table iskolik.bireysel_kullanici (
     kullanici_id int,
-    ad           text not null,
     soyad        text not null,
     cinsiyet     char not null, --K,E
     dogum_tarihi date not null,
@@ -49,7 +49,6 @@ create table iskolik.bireysel_kullanici (
 
 create table iskolik.kurumsal_kullanici (
     kullanici_id   int,
-    ad             text not null,
     calisan_sayisi int,
     primary key (kullanici_id),
     constraint fk_kurumsal_kullanici__kullanici
@@ -71,6 +70,8 @@ create table iskolik.kategori (
 
 create table iskolik.profil (
     kullanici_id int,
+    meslek      text,
+    unvan       text,
     ozgecmis  text,
     primary key (kullanici_id),
     constraint fk_profil__kullanici

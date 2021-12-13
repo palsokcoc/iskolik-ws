@@ -1,28 +1,22 @@
 package ayu.edu.tr.iskolik.kullanici.domain.model.dto;
 
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici.Cinsiyet;
+import ayu.edu.tr.iskolik.profil.domain.model.dto.ProfilDTO;
+import ayu.edu.tr.iskolik.profil.domain.model.entity.Profil;
 import java.time.LocalDate;
 
 public class BireyselKullaniciDTO extends KullaniciDTO {
 
-	private String ad;
 	private String soyad;
 	private Cinsiyet cinsiyet;
 	private LocalDate dogumTarihi;
+	private ProfilDTO profil;
 
 	public BireyselKullaniciDTO() {
 		setTip("Bireysel");
 	}
 
 	/* getters-setters */
-	public String getAd() {
-		return ad;
-	}
-
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-
 	public String getSoyad() {
 		return soyad;
 	}
@@ -45,5 +39,13 @@ public class BireyselKullaniciDTO extends KullaniciDTO {
 
 	public void setDogumTarihi(LocalDate dogumTarihi) {
 		this.dogumTarihi = dogumTarihi;
+	}
+
+	public ProfilDTO getProfil() {
+		return profil;
+	}
+
+	public void setProfil(ProfilDTO profil) {
+		this.profil = profil;
 	}
 }

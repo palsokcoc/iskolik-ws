@@ -31,6 +31,9 @@ public class KullaniciRequest {
 	private String kullaniciAdi;
 
 	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
+	private String ad;
+
+	@NotNull(message = "validation.request.field.null", groups = {PostValidation.class, PutValidation.class, Default.class})
 	private String email;
 
 	@NotNull(message = "validation.request.field.null", groups = {Default.class})
@@ -65,6 +68,14 @@ public class KullaniciRequest {
 
 	public void setKullaniciAdi(String kullaniciAdi) {
 		this.kullaniciAdi = kullaniciAdi;
+	}
+
+	public String getAd() {
+		return ad;
+	}
+
+	public void setAd(String ad) {
+		this.ad = ad;
 	}
 
 	public String getEmail() {

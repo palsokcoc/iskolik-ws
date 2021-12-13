@@ -8,6 +8,12 @@ import ayu.edu.tr.iskolik.kullanici.domain.model.dto.KurumsalKullaniciDTO;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.BireyselKullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.Kullanici;
 import ayu.edu.tr.iskolik.kullanici.domain.model.entity.KurumsalKullanici;
+import ayu.edu.tr.iskolik.profil.domain.model.dto.SertifikaDTO;
+import ayu.edu.tr.iskolik.profil.domain.model.dto.SinavDTO;
+import ayu.edu.tr.iskolik.profil.domain.model.dto.YetenekDTO;
+import ayu.edu.tr.iskolik.profil.domain.model.entity.Sertifika;
+import ayu.edu.tr.iskolik.profil.domain.model.entity.Sinav;
+import ayu.edu.tr.iskolik.profil.domain.model.entity.Yetenek;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -36,6 +42,7 @@ public interface KullaniciDTOMapper {
 	BireyselKullaniciDTO toBireyselKullaniciDTO(BireyselKullanici bireyselKullanici);
 	KurumsalKullaniciDTO toKurumsalKullaniciDTO(KurumsalKullanici kurumsalKullanici);
 	List<KullaniciDTO> toKullaniciDTOList(List<Kullanici> kullaniciList);
+	List<BireyselKullaniciDTO> toBireyselKullaniciDTOList(List<BireyselKullanici> bireyselKullaniciList);
 
 	// DTO --> Entity
 	default Kullanici toKullanici(KullaniciDTO kullaniciDTO) {
@@ -61,5 +68,15 @@ public interface KullaniciDTOMapper {
 	@Mapping(target = "kayitTarihi", ignore = true)
 	@Mapping(target = "sifreHash", ignore = true)
 	KurumsalKullanici toKurumsalKullanici(KurumsalKullaniciDTO kurumsalKullaniciDTO);
+
+
+	@Mapping(target = "profil", ignore = true)
+	SertifikaDTO toSertifikaDTO(Sertifika sertifika);
+
+	@Mapping(target = "profil", ignore = true)
+	SinavDTO toSinavDTO(Sinav sinav);
+
+	@Mapping(target = "profil", ignore = true)
+	YetenekDTO toYetenekDTO(Yetenek yetenek);
 }
 

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -53,12 +54,10 @@ public class KullaniciController extends BaseController {
 		return createResponseForSuccess(HttpStatus.OK, kullaniciDTOList);
 	}
 
-	@GetMapping(value = "/aramaSonucu")
-	public ResponseEntity<GenericServerResponse> getKullaniciListForElemanArama(@ModelAttribute() Filters filters, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
-		BaseSpecification specification = new KullaniciSpecification(filters);
-//		List<ElemanAramaSonucuDTO> aramaSonucuDTOList = kullaniciService.findBireyselKullaniciOzet(specification, pageable);
-		List<BireyselKullaniciDTO> aramaSonucuDTOList = kullaniciService.findBireyselKullanici(specification, pageable);
-		return createResponseForSuccess(HttpStatus.OK, aramaSonucuDTOList);
+	@GetMapping(value = "/arama-sonucu")
+	public ResponseEntity<GenericServerResponse> getKullaniciListForElemanArama(@RequestParam(defaultValue = "") String filter, @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
+		List<BireyselKullaniciDTO> elemanlar = kullaniciService.elemanAra(filter, pageable);
+		return createResponseForSuccess(HttpStatus.OK, elemanlar);
 	}
 
 	@PostMapping(value = "")

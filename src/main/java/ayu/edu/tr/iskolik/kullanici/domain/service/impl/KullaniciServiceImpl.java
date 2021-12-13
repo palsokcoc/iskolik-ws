@@ -53,6 +53,11 @@ public class KullaniciServiceImpl implements KullaniciService {
 	}
 
 	@Override
+	public List<BireyselKullaniciDTO> elemanAra(String filter, Pageable pageable) {
+		return kullaniciDTOMapper.toBireyselKullaniciDTOList(kullaniciRepository.elemanAra(filter, pageable));
+	}
+
+	@Override
 	public List<ElemanAramaSonucuDTO> findBireyselKullaniciOzet(Specification specification, Pageable pageable) {
 		return kullaniciRepository.findBireyselKullaniciOzet(specification, pageable);
 	}

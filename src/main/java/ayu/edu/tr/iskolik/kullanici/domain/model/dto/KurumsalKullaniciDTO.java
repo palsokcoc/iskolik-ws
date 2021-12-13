@@ -2,7 +2,6 @@ package ayu.edu.tr.iskolik.kullanici.domain.model.dto;
 
 public class KurumsalKullaniciDTO extends KullaniciDTO {
 
-	private String ad;
 	private int calisanSayisi;
 
 	public KurumsalKullaniciDTO() {
@@ -10,14 +9,6 @@ public class KurumsalKullaniciDTO extends KullaniciDTO {
 	}
 
 	/* getters-setters */
-	public String getAd() {
-		return ad;
-	}
-
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-
 	public int getCalisanSayisi() {
 		return calisanSayisi;
 	}

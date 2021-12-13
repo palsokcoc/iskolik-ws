@@ -1,5 +1,7 @@
 package ayu.edu.tr.iskolik.profil.domain.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class SinavDTO {
 
 	private Long sinavId;

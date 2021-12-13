@@ -9,6 +9,7 @@ public class KullaniciDTO {
 	private String tip;
 	private Long kullaniciId;
 	private String kullaniciAdi;
+	private String ad;
 	private String email;
 	private Durum durum;
 	private LocalDate kayitTarihi;
@@ -37,6 +38,14 @@ public class KullaniciDTO {
 
 	public void setKullaniciAdi(String kullaniciAdi) {
 		this.kullaniciAdi = kullaniciAdi;
+	}
+
+	public String getAd() {
+		return ad;
+	}
+
+	public void setAd(String ad) {
+		this.ad = ad;
 	}
 
 	public String getEmail() {

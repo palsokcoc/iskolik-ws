@@ -8,9 +8,6 @@ import javax.persistence.Table;
 @Table(schema = "iskolik", name = "kurumsal_kullanici")
 public class KurumsalKullanici extends Kullanici {
 
-	@Column(name = "ad", nullable = false)
-	private String ad;
-
 	@Column(name = "calisan_sayisi", nullable = false)
 	private int calisanSayisi;
 
@@ -46,14 +43,6 @@ public class KurumsalKullanici extends Kullanici {
 	}
 
 	/* getters-setters */
-	public String getAd() {
-		return ad;
-	}
-
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-
 	public int getCalisanSayisi() {
 		return calisanSayisi;
 	}

@@ -17,9 +17,6 @@ import javax.persistence.Table;
 @Table(schema = "iskolik", name = "bireysel_kullanici")
 public class BireyselKullanici extends Kullanici {
 
-	@Column(name = "ad", nullable = false)
-	private String ad;
-
 	@Column(name = "soyad", nullable = false)
 	private String soyad;
 
@@ -81,14 +78,6 @@ public class BireyselKullanici extends Kullanici {
 	}
 
 	/* getters-setters */
-	public String getAd() {
-		return ad;
-	}
-
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-
 	public String getSoyad() {
 		return soyad;
 	}
