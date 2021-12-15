@@ -10,5 +10,5 @@ import org.springframework.data.repository.query.Param;
 public interface RaporService {
 
 	List<EnCokArananOzelliklerRaporuDTO> findEnCokArananOzellikler(LocalDate ilkTarih, LocalDate sonTarih, Pageable pageable);
-	List<EnCokBasvuruYapilanIlanlarDTO> findEnCokBasvuruYapilanIlanlar(LocalDate ilkTarih, LocalDate sonTarih);
+	List<EnCokBasvuruYapilanIlanlarDTO> findEnCokBasvuruYapilanIlanlar(LocalDate ilkTarih, LocalDate sonTarih, Pageable pageable);
 }

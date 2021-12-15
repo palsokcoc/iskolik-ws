@@ -49,16 +49,16 @@ public class RaporController extends BaseController {
 
 	@GetMapping(value = "/en-cok-aranan-ozellikler")
 	public ResponseEntity<GenericServerResponse> findEnCokArananOzellikler(@RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate ilkTarih, @RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate sonTarih, Pageable pageable) {
-		System.out.println("ilk tarih: " + ilkTarih);
-		System.out.println("son tarih: " + sonTarih);
 		final List<EnCokArananOzelliklerRaporuDTO> enCokArananOzellikler = raporService.findEnCokArananOzellikler(ilkTarih, sonTarih, pageable);
 		System.out.println("size:" + enCokArananOzellikler.size());
 		return createResponseForSuccess(HttpStatus.OK, enCokArananOzellikler);
 	}
 
 	@GetMapping(value = "/en-cok-basvuru-yapilan-ilanlar")
-	public ResponseEntity<GenericServerResponse> findEnCokBasvuruYapilanIlanlar(@RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate ilkTarih, @RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate sonTarih) {
-		final List<EnCokBasvuruYapilanIlanlarDTO> enCokBasvuruYapilanIlanlarDTO = raporService.findEnCokBasvuruYapilanIlanlar(ilkTarih, sonTarih);
+	public ResponseEntity<GenericServerResponse> findEnCokBasvuruYapilanIlanlar(@RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate ilkTarih, @RequestParam(required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate sonTarih, Pageable pageable) {
+		System.out.println("ilk tarih: " + ilkTarih);
+		System.out.println("son tarih: " + sonTarih);
+		final List<EnCokBasvuruYapilanIlanlarDTO> enCokBasvuruYapilanIlanlarDTO = raporService.findEnCokBasvuruYapilanIlanlar(ilkTarih, sonTarih, pageable);
 		return createResponseForSuccess(HttpStatus.OK, enCokBasvuruYapilanIlanlarDTO);
 	}
 }

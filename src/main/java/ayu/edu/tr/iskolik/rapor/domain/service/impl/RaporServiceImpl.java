@@ -46,9 +46,9 @@ public class RaporServiceImpl implements RaporService {
 	}
 
 	@Override
-	public List<EnCokBasvuruYapilanIlanlarDTO> findEnCokBasvuruYapilanIlanlar(LocalDate ilkTarih, LocalDate sonTarih) {
+	public List<EnCokBasvuruYapilanIlanlarDTO> findEnCokBasvuruYapilanIlanlar(LocalDate ilkTarih, LocalDate sonTarih, Pageable pageable) {
 		ilkTarih = (ilkTarih != null ? ilkTarih : LocalDate.EPOCH);
 		sonTarih = (sonTarih != null ? sonTarih : LocalDate.now());
-		return raporRepository.findEnCokBasvuruYapilanIlanlar(ilkTarih, sonTarih);
+		return raporRepository.findEnCokBasvuruYapilanIlanlar(ilkTarih, sonTarih, pageable);
 	}
 }

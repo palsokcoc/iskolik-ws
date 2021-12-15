@@ -24,15 +24,15 @@ public interface RaporRepository extends JpaRepository<Rapor, Long> {
 	List<EnCokArananOzelliklerRaporuDTO> findEnCokArananOzellikler(@Param("ilkTarih") LocalDate ilkTarih, @Param("sonTarih") LocalDate sonTarih, Pageable pageable);
 
 	@Query("select new ayu.edu.tr.iskolik.rapor.domain.model.dto.EnCokBasvuruYapilanIlanlarDTO (" +
-			"kullanici.ad, ilan.unvan, ilan.yer, ilan.durum, count(*)) " +
+			"ilan.ilanId, kullanici.ad, ilan.unvan, ilan.yer, ilan.durum, ilan.yayinTarihi, count(*) as adet) " +
 			"from  Basvuru basvuru " +
 			"inner join Ilan ilan " +
 			"on basvuru.ilan = ilan " +
 			"inner join Kullanici kullanici " +
 			"on ilan.kullanici = kullanici " +
 			"where basvuru.basvuruTarihi between :ilkTarih and :sonTarih " +
-			"group by kullanici.ad, ilan.unvan, ilan.yer, ilan.durum " +
+			"group by ilan.ilanId, kullanici.ad, ilan.unvan, ilan.yer, ilan.yayinTarihi, ilan.durum " +
 			"order by count(*) desc"
 	)
-	List<EnCokBasvuruYapilanIlanlarDTO> findEnCokBasvuruYapilanIlanlar(@Param("ilkTarih") LocalDate ilkTarih, @Param("sonTarih") LocalDate sonTarih);
+	List<EnCokBasvuruYapilanIlanlarDTO> findEnCokBasvuruYapilanIlanlar(@Param("ilkTarih") LocalDate ilkTarih, @Param("sonTarih") LocalDate sonTarih, Pageable pageable);
 }
