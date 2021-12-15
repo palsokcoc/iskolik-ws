@@ -1,10 +1,5 @@
 package ayu.edu.tr.iskolik.common.model.response;
 
-/**
- * Kurum içi standartları uymak için platform.web2 paketinde tanımlanmış
- * olan tr.gov.tcmb.web.model.Message modelinden kopyalandı.
- * - errorCode alanı eklendi
- */
 public class Message {
 	private final String errorCode;
 	private String message;
